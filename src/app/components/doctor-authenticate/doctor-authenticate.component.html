@@ -1,0 +1,38 @@
+<div class="container tp">
+  <div class="row no-gutters">
+    <div class="col-xl-6">
+      <div class="appointment-box-layout1">
+        <h2 class="title">OTP<span class="red">&nbsp;Verification</span></h2>
+        <div class="row">
+          <div class="form-group col-12 text-center">
+            <div class="OTPMsg">{{OTPMsg}}</div>
+          </div>
+        </div>
+        <form [formGroup]="authenticateForm" (ngSubmit)="authenticateFun()">
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="OTP" placeholder="OTP" [(ngModel)]="OTPData.OTP"
+              [ngClass]="{ 'is-invalid': submitted && OTPControl.OTP.errors}" (keypress)="hideOtpMsg($event)" />
+            <div *ngIf="submitted && OTPControl.OTP.errors" class="invalid-feedback">
+              <div *ngIf="OTPControl.OTP.errors.required">OTP is required</div>
+            </div>
+          </div>
+          <div class="text-right">
+            <a href="javascript:void(0);" class="forgot-link" (click)="resendCodeFun()">Resend Code?</a>
+          </div>
+          <div class="row">
+            <div class="form-group col-12 text-center">
+              <div class="errMsg">{{errMsg}}</div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Submit</button>
+          <!-- <button class="btn btn-primary btn-block btn-lg login-btn" type="reset" (click)="reset()">Clear</button> -->
+        </form>
+      </div>
+    </div>
+    <div class="col-xl-6">
+      <div class="appointment-banner">
+        <img src="assets/img/doctors/figure2.png" alt="appointment" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</div>

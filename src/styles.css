@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+.activate {
+  border-bottom: 3px solid #09e5ab;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.tableEmptyDataMsg {
+  color: red;
+  font-family: system-ui;
+  font-stretch: inherit;
+  font-style: oblique;
+  font-feature-settings: unset;
+  font-weight: bold;
+}
+.OTPMsg {
+  color: rgb(50, 8, 240);
+  font-weight: bold;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,80 @@
+<div class="content tp">
+  <div class="container-fluid">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-md-8 offset-md-2">
+        <!-- Login Tab Content -->
+        <div class="account-content">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7 col-lg-6 login-left">
+              <img src="../../../assets/img/login-banner.png" class="img-fluid img1" alt="Doccure Login">
+            </div>
+            <div class="col-md-12 col-lg-6 login-right">
+              <div class="login-header1">
+                <a href="javascript:void(0);" style="float: left;" (click)="loginStatusFun(2)">
+                  <h3 [ngClass]="{'activate': loginStatus == 2 }">Login As User</h3>
+                </a>
+                <div class="text-right">
+                  <a href="javascript:void(0);" class="forgot-link" (click)="loginStatusFun(1)">
+                    <h3 [ngClass]="{'activate': loginStatus == 1 }">Login As Hospital</h3>
+                  </a>
+                </div>
+              </div>
+              <form [formGroup]="registerForm" (ngSubmit)="login()">
+                <div class="form-row bottomPadding">
+                  <div class="col-lg-12 col-md-12">
+                    <div class="form-group">
+                      <input type="email/Mobile" class="form-control floating loginPadding"
+                        formControlName="MobileEmail" placeholder="Email/Mobile" [(ngModel)]="details.MobileEmail"
+                        (keydown)="clearCrendtialsMsg($event)"
+                        [ngClass]="{ 'is-invalid': submitted && loginControl.MobileEmail.errors}" />
+                      <div *ngIf="submitted && loginControl.MobileEmail.errors" class="invalid-feedback rightSide">
+                        <div *ngIf="loginControl.MobileEmail.errors.required">Mobile or Email is required</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-lg-12 col-md-12">
+                    <div class="form-group">
+                      <input type="password" class="form-control floating loginPadding" formControlName="Password"
+                        placeholder="Password" [(ngModel)]="details.Password" (keydown)="clearCrendtialsMsg($event)"
+                        [ngClass]="{ 'is-invalid': submitted && loginControl.Password.errors}" />
+                      <div *ngIf="submitted && loginControl.Password.errors" class="invalid-feedback rightSide">
+                        <div *ngIf="loginControl.Password.errors.required">Password is required</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-lg-12 col-md-12">
+                    <div class="text-right">
+                      <a class="forgot-link" [routerLink]="['/user/forgotPassword']">Forgot Password ?</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-lg-12 text-center">
+                    <button class="btn btn-primary btn-lg login-btn">Login</button>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-lg-12 col-md-12 text-center">
+                    <div class="errMsg">{{errMsg}}</div>
+                    <div *ngIf="loadSymbol" class="spinner-border"></div>
+                  </div>
+                </div>
+                <!-- <button class="btn btn-primary btn-block btn-lg login-btn" type="reset"
+                  (click)="onReset()">Cancel
+                </button>
+               -->
+                <div class="text-center dont-have">Don’t have an account?
+                  <a [routerLink]="['/register']">Register </a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title ">Appointment List</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead class=" text-primary">
+                  <th> S.No </th>
+                  <th> Slot ID </th>
+                  <th> User ID </th>
+                  <th> Created By </th>
+                  <th> Created Date </th>
+                  <th> Updated By </th>
+                  <th> Updated Date </th>
+                  <th> Status </th>
+                  <th> Action </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let appointment of appointmenList; let i=index">
+                    <td> {{i+1}} </td>
+                    <td> {{appointment.SlotId}} </td>
+                    <td> {{appointment.UserId}} </td>
+                    <td> {{appointment.CreatedBy}}</td>
+                    <td> {{appointment.CreatedDate | date:'dd-MM-yyyy HH:mm':'GMT05:30'}}</td>
+                    <td> {{appointment.UpdatedBy }}</td>
+                    <td> {{appointment.UpdatedDate| date:'dd-MM-yyyy HH:mm':'GMT05:30'}} </td>
+                    <td> {{appointment.Status}} </td>
+                    <!-- <td style="font-weight: bold; color: green;" *ngIf="slot.Status == 'Active'"> {{slot.Status}} </td>
+                    <td style="font-weight: bold; color: red;" *ngIf="slot.Status == 'InActive'"> {{slot.Status}} </td> -->
+                    <td> <a title="Edit Appointment" href="/appointment"> <i class="fa fa-edit"></i> </a> &nbsp;
+                      <a title="Delete Appointment" (click)="deleteAppointment()"> <i class="fa fa-trash-o"></i> </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

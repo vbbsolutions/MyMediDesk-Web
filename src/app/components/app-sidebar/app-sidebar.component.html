@@ -1,0 +1,69 @@
+<div class="profile-sidebar">
+  <div class="widget-profile pro-widget-content">
+    <div class="profile-info-widget">
+      <a [routerLink]="['/user/profile']" class="booking-doc-img">
+        <img src="{{ImageURL}}" alt="Failed to Load Image" title="Change Image">
+      </a>
+      <div class="profile-det-info">
+        <h3 class="mb-3 red">{{userList.FirstName}} {{userList.LastName}}</h3>
+        <div class="patient-details">
+          <h5>{{LogingMemberType}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dashboard-widget">
+    <nav class="dashboard-menu">
+      <ul>
+        <li class="active">
+          <a href="javascript:void(0);" [routerLink]="['/user/dashboard']">
+            <i class="fas fa-columns"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" [routerLink]="['/user/kyc']">
+            <i class="fas fa-file"></i>
+            <span>KYC</span>
+          </a>
+        </li>
+        <!-- <li>
+          <a [routerLink]="['/patient/calendar']">
+            <i class="fas fa-plus-square"></i>
+            <span>My Calendar</span>
+          </a>
+        </li> -->
+        <li>
+          <a href="javascript:void(0);" [routerLink]="['/user/profile']">
+            <i class="fas fa-user-cog"></i>
+            <span>Profile</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" [routerLink]="['/user/updatePassword']">
+            <i class="fas fa-user-cog"></i>
+            <span>Change Password</span>
+          </a>
+        </li>
+        <!-- <li>
+            <a [routerLink]="['/patient/profile']">
+              <i class="fas fa-star"></i>
+              <span>Notifications</span>
+            </a>
+          </li> -->
+        <li>
+          <a href="javascript:void(0);" [routerLink]="['/user/wallet']">
+            <i class="fas fa-wallet"></i>
+            <span>My Wallet</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

@@ -1,0 +1,164 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h1 class="mb-3 red">My Appointments</h1>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col-md-6 text-left">
+            <div class="form-row">
+              <label for="inputPassword" class="col-sm-2 col-form-label form-inline">Search:</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchItem">
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-6 text-right">
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Show
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="javascript:void(0);">5</a>
+                <a class="dropdown-item" href="javascript:void(0);">10</a>
+                <a class="dropdown-item" href="javascript:void(0);">20</a>
+                <a class="dropdown-item" href="javascript:void(0);">50</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table id="ejemplo" class="table table-striped" style="width:100%">
+            <thead>
+              <tr>
+                <th>SI.No</th>
+                <th>Doctor</th>
+                <th>Hospital</th>
+                <th>Appt Date</th>
+                <th>Booking Date</th>
+                <th>Amount(Rs.)</th>
+                <th>Notes</th>
+                <th>Status</th>
+                <th>Action</th>
+                <th>To Get CashBack</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr *ngFor="let appointment of appointmenList; let i=index">
+                  <td>
+                    <h2 class="table-avatar">
+                      <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+                        <img class="avatar-img rounded-circle"
+                          src="../../../../../../assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                      </a>
+                      <a href="doctor-profile.html">Dr. Darren Elder <span>Dental</span></a>
+                    </h2>
+                  </td>
+                  <td>{{appointment.CreatedDate | date:'dd-MM-yyyy'}}<span
+                      class="d-block text-info">{{appointment.CreatedDate | date:'HH:mm':'GMT05:30'}}</span>
+                  </td>
+                  <td>12 Nov 2019</td>
+                  <td>$160</td>
+                  <td>16 Nov 2019</td>
+                  <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                  <td class="text-right">
+                    <div class="table-action">
+                      <a href="#" class="btn btn-sm bg-success-light">
+                        <i class="far fa-edit"></i> Edit
+                      </a>
+                    </div>
+                  </td>
+                </tr> -->
+              <tr *ngFor="let appointment of appointmenList | filter:searchItem; let i=index">
+                <td>{{i+1}}</td>
+                <td>
+                  <h2 class="table-avatar tablePadding">
+                    <a href="javascript:void(0);" class="avatar avatar-sm mr-2">
+                      <img class="avatar-img rounded-circle imgStyles" src="{{ImageURL}}{{appointment.DoctorURL}}">
+                    </a>
+                  </h2>
+                  <a href="javascript:void(0);">
+                    Dr.
+                    {{appointment.DoctorFirstName}} {{appointment.DoctorLastName}}<span
+                      class="d-block text-info">{{appointment.Specialization}}</span>
+                  </a>
+                </td>
+                <td>{{appointment.HospitalName}}</td>
+                <td>{{appointment.SlotTime | date:'dd-MM-yyyy'}}
+                  <span class="d-block text-info">{{appointment.SlotTime | date:'hh:mm a':'GMT+05:30'}}</span>
+                </td>
+                <td>
+                  <span *ngIf="appointment.UpdatedDate == null">
+                    {{appointment.CreatedDate | date:'dd-MM-yyyy'}}
+                    <span class="d-block text-info"> {{appointment.CreatedDate | date:'hh:mm a':'GMT+05:30'}}</span>
+                  </span>
+                  <span *ngIf="appointment.UpdatedDate != null">
+                    {{appointment.UpdatedDate | date:'dd-MM-yyyy'}}
+                    <span class="d-block text-info">{{appointment.UpdatedDate | date:'hh:mm a':'GMT+05:30'}}</span>
+                  </span>
+                </td>
+                <td>{{appointment.ConsultationFee}}</td>
+                <td>{{appointment.Notes}}</td>
+                <td>
+                  <h2 *ngIf="appointment.AppointmentStatus == 'active'">
+                    <span class="badge badge-pill bg-success-light">Confirmed</span>
+                  </h2>
+                  <h2 *ngIf="appointment.AppointmentStatus == 'inactive'">
+                    <span class="badge badge-pill bg-warning-light">Pending</span>
+                  </h2>
+                  <h2 *ngIf="appointment.AppointmentStatus == 'cancelled'">
+                    <span class="badge badge-pill bg-danger-light">Cancelled</span>
+                  </h2>
+                </td>
+                <td class="text-center" *ngIf="appointment.ExpiredDate == 'Expired'">
+                  <a class="badge badge-pill bg-danger-light">Expired</a>
+                </td>
+                <td class="text-center" *ngIf="appointment.ExpiredDate == 'UnExpired'">
+                  <div class="table-action" *ngIf="appointment.AppointmentStatus != 'active'">
+                    <a href="javascript:void(0);" class="badge badge-pill bg-warning-light"
+                      (click)="editAppointment(appointment.SlotId, appointment.AppointmentId)"
+                      *ngIf="appointment.AppointmentStatus == 'inactive'">
+                      <i class="far fa-edit"></i> Edit
+                    </a>&nbsp;&nbsp;
+                    <a href="javascript:void(0);" (click)="cancelAppointment(appointment.AppointmentId)"
+                      class="badge badge-pill bg-danger-light" *ngIf="appointment.AppointmentStatus != 'cancelled'">
+                      <i class="far fa-trash-alt"></i> Cancel
+                    </a>
+                    <a class="badge badge-pill bg-danger-light" *ngIf="appointment.AppointmentStatus == 'cancelled'">
+                      <i class="far fa-trash-alt"></i> Cancelled
+                    </a>
+                  </div>
+                </td>
+                <td>
+                  <div class="table-action"
+                    *ngIf="appointment.WalletStatus != 'Pending' && appointment.PatientStatus != null && appointment.WalletStatus != 'Approved'">
+                    <span class="change-photo-btn up-pic prescriptionStyles">
+                      <span><i class="fa fa-upload"></i> Upload Prescription</span>
+                      <input type="file" class="upload" (change)="onSelectFile($event)" />
+                    </span>
+                    <a href="javascript:void(0);" class="badge badge-pill  bg-success-light"
+                      (click)="uploadprescription(appointment.AppointmentId)">Submit
+                    </a>
+                  </div>
+                  <h2 *ngIf="appointment.WalletStatus == 'Pending'">
+                    <span class="badge badge-pill bg-warning-light">Pending</span>
+                  </h2>
+                  <h2 *ngIf="appointment.WalletStatus == 'Approved'">
+                    <span class="badge badge-pill bg-success-light">Approved</span>
+                  </h2>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="appointmenListLength == 0">
+              <tr>
+                <td colspan="10" class="tableEmptyDataMsg">Sorry, Appointments Not Available</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

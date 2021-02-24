@@ -1,0 +1,166 @@
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-xl-6">
+      <div class="appointment-box-layout1">
+        <h2 class="title">Doctor<span class="red">&nbsp;Register</span></h2>
+        <form [formGroup]="doctorRegisterForm" [hidden]="registerStatus != 1" (ngSubmit)="doctorRegisterDataFun()">
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="FirstName" placeholder="First Name"
+              [(ngModel)]="doctorRegisterData.FirstName" (keypress)="allowOnlyChar($event)"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.FirstName.errors}" />
+            <div *ngIf="submitted && doctorRegister.FirstName.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.FirstName.errors.required">First Name is required</div>
+              <div *ngIf="doctorRegister.FirstName.errors.maxlength">First Name must not greater than 50 digits</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="LastName" placeholder="Last Name"
+              [(ngModel)]="doctorRegisterData.LastName" (keypress)="allowOnlyChar($event)"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.LastName.errors}" />
+            <div *ngIf="submitted && doctorRegister.LastName.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.LastName.errors.required">Last Name is required</div>
+              <div *ngIf="doctorRegister.LastName.errors.maxlength">Last Name must not greater than 50 digits</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="file" class="form-control" formControlName="ImageURL" name="ImageURL" [(ngModel)]="ImageURL"
+              (change)="onSelectFile($event)"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.ImageURL.errors}" />
+            <div *ngIf="submitted && doctorRegister.ImageURL.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.ImageURL.errors.required">Profile Pic is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="Degree" placeholder="Degree"
+              [(ngModel)]="doctorRegisterData.Degree"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.Degree.errors}" />
+            <div *ngIf="submitted && doctorRegister.Degree.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.Degree.errors.required">Degree is required</div>
+              <div *ngIf="doctorRegister.Degree.errors.maxlength">Degree not greater than 20 Characters</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="RegistrationNo" placeholder="Registration No"
+              [(ngModel)]="doctorRegisterData.RegistrationNo"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.RegistrationNo.errors}" />
+            <div *ngIf="submitted && doctorRegister.RegistrationNo.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.RegistrationNo.errors.required">Registration No is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="MedicalCouncilNo" placeholder="MedicalCouncil No"
+              [(ngModel)]="doctorRegisterData.MedicalCouncilNo"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.MedicalCouncilNo.errors}" />
+            <div *ngIf="submitted && doctorRegister.MedicalCouncilNo.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.MedicalCouncilNo.errors.required">MedicalCouncil No is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <select class="form-control selectPadding" formControlName="SpecializationId"
+              [(ngModel)]="doctorRegisterData.SpecializationId"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.SpecializationId.errors}">
+              <option value="">Select Specialization</option>
+              <option [value]="specialization.Id" *ngFor=" let specialization of	specializationList">
+                {{specialization.Specialization}}
+              </option>
+            </select>
+            <div *ngIf="submitted && doctorRegister.SpecializationId.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.SpecializationId.errors.required">Specialization is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="ConsultationFee" placeholder="Consultation Fee"
+              [(ngModel)]="doctorRegisterData.ConsultationFee" (keypress)="numbersOnly($event)"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.ConsultationFee.errors}" />
+            <div *ngIf="submitted && doctorRegister.ConsultationFee.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.ConsultationFee.errors.required">ConsultationFee is required</div>
+            </div>
+          </div>
+          <!-- <div class="form-group">
+            <select class="form-control" formControlName="HospitalId" [(ngModel)]="doctorRegisterData.HospitalId"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.HospitalId.errors}">
+              <option value="">Select Hospital</option>
+              <option [value]="hospital.Id" *ngFor=" let hospital of	hospitalList">
+                {{hospital.Name}}
+              </option>
+            </select>
+            <div *ngIf=" submitted && doctorRegister.HospitalId.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.HospitalId.errors.required">Hospital is required</div>
+            </div>
+          </div> -->
+          <div class="form-group">
+            <input type="text" class="form-control " formControlName="MobileNumber" placeholder="Mobile Number"
+              [(ngModel)]="doctorRegisterData.MobileNumber" (keypress)="numbersOnly($event)"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.MobileNumber.errors}" />
+            <div *ngIf="submitted && doctorRegister.MobileNumber.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.MobileNumber.errors.required">Mobile Number is required</div>
+              <div *ngIf="doctorRegister.MobileNumber.errors.minlength">Mobile Number must be at least 10 digits</div>
+              <div *ngIf="doctorRegister.MobileNumber.errors.maxlength">Mobile Number must be not greater then 10
+                digits
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-control" formControlName="Email" placeholder="Email"
+              [(ngModel)]="doctorRegisterData.Email"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.Email.errors}" />
+            <div *ngIf="submitted && doctorRegister.Email.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.Email.errors.required">Email is required</div>
+              <div *ngIf="doctorRegister.Email.errors.email">Email must be a valid email address</div>
+            </div>
+          </div>
+          <!-- <div class="form-group">
+            <input type="password" class="form-control" formControlName="Password" placeholder="Password"
+              [(ngModel)]="doctorRegisterData.Password"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.Password.errors}" />
+            <div *ngIf="submitted && doctorRegister.Password.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.Password.errors.required">Password is required</div>
+              <div *ngIf="doctorRegister.Password.errors.minlength">Password must be at least 6 digits</div>
+              <div *ngIf="doctorRegister.Password.errors.maxlength">Password must be not greater then 20 digits</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" formControlName="ConfirmPassword" placeholder="Confirm Password"
+              [(ngModel)]="ConfirmPassword"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.ConfirmPassword.errors}" />
+            <div *ngIf="submitted && doctorRegister.ConfirmPassword.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.ConfirmPassword.errors.required">Confirm Password is required</div>
+              <div *ngIf="doctorRegister.ConfirmPassword.errors.mustMatch">Passwords must match</div>
+            </div>
+          </div> -->
+          <div class="form-group">
+            <select class="form-control selectPadding" formControlName="City" [(ngModel)]="doctorRegisterData.City"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.City.errors}">
+              <option value="">Select City</option>
+              <option value="Hyderabad">Hyderabad</option>
+            </select>
+            <div *ngIf="submitted && doctorRegister.City.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.City.errors.required">City is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <select class="form-control selectPadding" formControlName="State" [(ngModel)]="doctorRegisterData.State"
+              [ngClass]="{ 'is-invalid': submitted && doctorRegister.State.errors}">
+              <option value="">Select Location</option>
+              <option value="Ameerpet">Ameerpet</option>
+              <option value="BanjaraHills">BanjaraHills</option>
+              <option value="JubleeHills">JubleeHills</option>
+              <option value="Kukatpally">Kukatpally</option>
+              <option value="Sanathnagar">Sanathnagar</option>
+            </select>
+            <div *ngIf="submitted && doctorRegister.State.errors" class="invalid-feedback">
+              <div *ngIf="doctorRegister.State.errors.required">State is required</div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Register</button>
+          <!-- <button class="btn btn-primary btn-block btn-lg login-btn" type="reset" (click)="reset()">Clear</button> -->
+        </form>
+      </div>
+    </div>
+    <div class="col-xl-6">
+      <div class="appointment-banner">
+        <img src="assets/img/doctors/figure2.png" alt="appointment" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="mb-4 red"> Archieved List</h3>
+        <div class="table-responsive">
+          <div class="table-responsive">
+            <table id="ejemplo" class="table" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Patient ID</th>
+                  <th>Patient Name</th>
+                  <th>Age</th>
+                  <th>Notes</th>
+                  <th>Address</th>
+                  <th>Phone</th>
+                  <th>Last Visit</th>
+                  <th class="text-right">Paid</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="appointmentList != null && appointmentList.length > 0">
+                <tr *ngFor="let appointment of appointmentList">
+                  <td>#PT001</td>
+                  <td>
+                    <h2 class="table-avatar">
+                      <a href="javascript:void(0);" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle"
+                          src="../../../assets/img/patients/patient1.jpg" alt="User Image"></a>
+                      <a href="javascript:void(0);">{{appointment.UserFirstName}} {{appointment.UserLastName}}</a>
+                    </h2>
+                  </td>
+                  <td>29</td>
+                  <td>{{appointment.Notes}}</td>
+                  <td>4417 Goosetown Drive, Taylorsville, North Carolina, 28681</td>
+                  <td>8286329170</td>
+                  <td>{{appointment.SlotTime| date:'dd-MM-yyyy'}} {{appointment.SlotTime| date:'hh:mm a':'GMT05:30'}}
+                  </td>
+                  <td class="text-right">{{appointment.ConsultationFee}}</td>
+                </tr>
+
+              </tbody>
+              <tbody *ngIf="appointmentList == null || appointmentList.length <= 0">
+                <tr>
+                  <td colspan="9">
+                    No Archived Patients
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

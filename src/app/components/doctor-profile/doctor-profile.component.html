@@ -1,0 +1,210 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h1 class="mb-3 red">Update Profile</h1>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="doctorProfileForm" (ngSubmit)="hospitalProfileUpdate()">
+          <div class="row form-row">
+            <div class="col-12 col-md-12">
+              <div class="form-group">
+                <div class="change-avatar">
+                  <div class="profile-img">
+                    <img src="{{ImageURL}}" alt="Hospital Image" (click)="open(mymodal, ImageURL)">
+                  </div>
+                  <div class="upload-img">
+                    <div class="change-photo-btn">
+                      <span><i class="fa fa-upload"></i> Upload Photo</span>
+                      <input type="file" class="upload" (change)="onSelectFile($event)">
+                    </div>
+                    <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <label>Hospital Name</label>
+                <input type="text" class="form-control" formControlName="Name" [(ngModel)]="hospitalProfileData.Name"
+                  (keypress)="allowOnlyChar($event)"
+                  [ngClass]="{ 'is-invalid': submitted && doctorProfileControl.Name.errors}" />
+                <div *ngIf="submitted && doctorProfileControl.Name.errors" class="invalid-feedback">
+                  <div *ngIf="doctorProfileControl.Name.errors.required">Hospital Name is required</div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label>Email ID</label>
+                <span>
+                  {{hospitalProfileData.Email}}
+                </span>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label>Mobile Number</label>
+                <span>
+                  {{hospitalProfileData.MobileNumber}}
+                </span>
+              </div>
+            </div> -->
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <label>City</label>
+                <select class="form-control" formControlName="City" [(ngModel)]="hospitalProfileData.City"
+                  [ngClass]="{ 'is-invalid': submitted && doctorProfileControl.City.errors}">
+                  <option hidden value="">Select City</option>
+                  <option value="Hyderabad">Hyderabad</option>
+                </select>
+                <div *ngIf="submitted && doctorProfileControl.City.errors" class="invalid-feedback">
+                  <div *ngIf="doctorProfileControl.City.errors.required">City is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <label>Location</label>
+                <select class="form-control" formControlName="State" [(ngModel)]="hospitalProfileData.State"
+                  [ngClass]="{ 'is-invalid': submitted && doctorProfileControl.State.errors}">
+                  <option value="">Select Location</option>
+                  <option value="Ameerpet">Ameerpet</option>
+                  <option value="BanjaraHills">BanjaraHills</option>
+                  <option value="JubleeHills">JubleeHills</option>
+                  <option value="Kukatpally">Kukatpally</option>
+                  <option value="Sanathnagar">Sanathnagar</option>
+                </select>
+                <div *ngIf="submitted && doctorProfileControl.State.errors" class="invalid-feedback">
+                  <div *ngIf="doctorProfileControl.State.errors.required">State is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <label>Zip Code</label>
+                <input type="text" class="form-control" formControlName="ZipCode"
+                  [(ngModel)]="hospitalProfileData.ZipCode" (keypress)="numbersOnly($event)"
+                  [ngClass]="{ 'is-invalid': submitted && doctorProfileControl.ZipCode.errors}" />
+                <div *ngIf="submitted && doctorProfileControl.ZipCode.errors" class="invalid-feedback">
+                  <div *ngIf="doctorProfileControl.ZipCode.errors.required">ZipCode is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row form-row">
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <label>Contact Person Name</label>
+                <input type="text" class="form-control" formControlName="ContactPersonName"
+                  [(ngModel)]="hospitalProfileData.ContactPersonName"
+                  [ngClass]="{ 'is-invalid': submitted && doctorProfileControl.ContactPersonName.errors}" />
+                <div *ngIf="submitted && doctorProfileControl.ContactPersonName.errors" class="invalid-feedback">
+                  <div *ngIf="doctorProfileControl.ContactPersonName.errors.required">Contact Person Name is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <label>Contact Person Mobile</label>
+                <input type="text" class="form-control" formControlName="ContactPersonMobile"
+                  (keypress)="numbersOnly($event)" [(ngModel)]="hospitalProfileData.ContactPersonMobile"
+                  [ngClass]="{ 'is-invalid': submitted && doctorProfileControl.ContactPersonMobile.errors}" />
+                <div *ngIf="submitted && doctorProfileControl.ContactPersonMobile.errors" class="invalid-feedback">
+                  <div *ngIf="doctorProfileControl.ContactPersonMobile.errors.required">Contact Person Mobile is
+                    required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <label>Land Line</label>
+                <input type="text" class="form-control" formControlName="LandLine" (keypress)="numbersOnly($event)"
+                  [(ngModel)]="hospitalProfileData.LandLine"
+                  [ngClass]="{ 'is-invalid': submitted && doctorProfileControl.LandLine.errors}" />
+                <div *ngIf="submitted && doctorProfileControl.LandLine.errors" class="invalid-feedback">
+                  <div *ngIf="doctorProfileControl.LandLine.errors.required">Land Line is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label>Office</label>
+            <input type="text" value="+1 202-555-0125" class="form-control">
+          </div>
+        </div>
+      <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label>Zip Code</label>
+            <input type="text" class="form-control" value="13420">
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label>Country</label>
+            <input type="text" class="form-control" value="United States">
+          </div>
+        </div> -->
+          <div class="submit-section text-right">
+            <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+          </div>
+        </form>
+        <hr>
+        <form [formGroup]="emailForm" (ngSubmit)="emailFun()">
+          <div class="row form-row">
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label>Email ID</label>
+                <input type="email" class="form-control" formControlName="Email" [(ngModel)]="emailData.Email"
+                  [ngClass]="{ 'is-invalid': submitted && emailControl.Email.errors}" />
+                <div *ngIf="submitted && emailControl.Email.errors" class="invalid-feedback">
+                  <div *ngIf="emailControl.Email.errors.required">Email is required</div>
+                  <div *ngIf="emailControl.Email.errors.email">Email must be a valid email address</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label>Mobile Number</label>
+                <input type="text" class="form-control" formControlName="MobileNumber"
+                  [(ngModel)]="emailData.MobileNumber" (keypress)="numbersOnly($event)"
+                  [ngClass]="{ 'is-invalid': submitted && emailControl.MobileNumber.errors}" />
+                <div *ngIf="submitted && emailControl.MobileNumber.errors" class="invalid-feedback">
+                  <div *ngIf="emailControl.MobileNumber.errors.required">Mobile Number is required</div>
+                  <div *ngIf="emailControl.MobileNumber.errors.minlength">Mobile Number must be at least 10 digits
+                  </div>
+                  <div *ngIf="emailControl.MobileNumber.errors.maxlength">Mobile Number must be not greater then
+                    10
+                    digits
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 text-right">
+              <div class=" form-group">
+                <label>&nbsp;</label>
+                <div class="submit-section">
+                  <button type="submit" class="btn btn-primary submit-btn btn-small">Save Changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img src="{{imageFile}}" alt="Failed to Load">
+  </div>
+</ng-template>

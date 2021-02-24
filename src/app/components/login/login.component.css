@@ -1,0 +1,25 @@
+.errMsg {
+  color: rgb(240, 42, 8);
+  font-weight: bold;
+}
+
+.setBox {
+  text-align: centre;
+  margin: 0px auto;
+  display: block;
+}
+md-spinner {
+  float: left;
+  width: 24px;
+  height: 24px;
+  margin: 5px 10px 0px 0px;
+}
+.loginPadding {
+  padding: 6px 12px 6px;
+}
+.bottomPadding {
+  padding-bottom: 10px;
+}
+.rightSide {
+  text-align: right;
+}

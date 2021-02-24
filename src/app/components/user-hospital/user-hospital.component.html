@@ -1,0 +1,289 @@
+<!-- Home Banner -->
+<div class="dc-innerbanner-holder dc-haslayout">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="dc-innerbanner">
+          <form [formGroup]="searchForm" class="dc-formtheme dc-form-advancedsearch dc-innerbannerform"
+            (ngSubmit)="searchFun()">
+            <fieldset>
+              <div class="form-group">
+                <div class="dc-select">
+                  <select formControlName="HospitalLocation" [(ngModel)]="HospitalLocation"
+                    [ngClass]="{ 'is-invalid': submitted && searchControl.HospitalLocation.errors}"
+                    (change)="searchHospitalLocation()">
+                    <option hidden value="">Location*</option>
+                    <option [value]="hospital.Name" *ngFor=" let hospital of	hospitalDropDownList">
+                      {{hospital.Name}}
+                    </option>
+                  </select>
+                  <div *ngIf=" submitted && searchControl.HospitalLocation.errors" class="invalid-feedback">
+                    <div *ngIf="searchControl.HospitalLocation.errors.required">Location is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search hospitals" formControlName="HospitalName"
+                  [(ngModel)]="HospitalName" (input)="searchHospitalFind()"
+                  [ngClass]="{ 'is-invalid': submitted && searchControl.HospitalName.errors}" />
+                <div *ngIf=" submitted && searchControl.HospitalName.errors" class="invalid-feedback">
+                  <div *ngIf="searchControl.HospitalName.errors.required">Hospital required</div>
+                </div>
+              </div>
+              <div class="dc-btnarea">
+                <button href="javascript:void(0);" class="dc-btn">Search</button>
+              </div>
+            </fieldset>
+          </form>
+          <a href="javascript:void(0);" class="dc-docsearch"><span class=""><i></i> <i class="fa fa-search"></i>
+              <i></i></span><span>Advanced <br>Search</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dc-advancedsearch-holder">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="dc-advancedsearchs">
+            <form class="dc-formtheme dc-form-advancedsearchs">
+              <fieldset>
+                <div class="form-group">
+                  <div class="dc-select">
+                    <select>
+                      <option value="Availability">Availability</option>
+                      <option value="Availability">morning</option>
+                      <option value="Availability">evening</option>
+                      <option value="Availability">night</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="dc-select">
+                    <select>
+                      <option value="Fee">Consultation Fee</option>
+                      <option value="Fee">20 $</option>
+                      <option value="Fee">22 $</option>
+                      <option value="Fee">18 $</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="dc-typeoptions">
+                    <span>Type:</span>
+                    <div class="dc-select">
+                      <select>
+                        <option value="Show">Show All</option>
+                        <option value="Show">Neurosurgeon</option>
+                        <option>Dermatologists</option>
+                        <option>Gastroenterologists</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <span class="dc-checkbox">
+                    <input id="dc-show" type="checkbox" name="show">
+                    <label for="dc-show">Show Nearest Only</label>
+                  </span>
+                </div>
+                <div class="dc-btnarea">
+                  <a href="javascript:void(0);" class="dc-btn dc-resetbtn">Reset Filters</a>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Home Banner -->
+
+
+<!-- breadcrumbarea End -->
+<!-- Main Start -->
+<main id="dc-main" class="dc-main dc-haslayout">
+  <!-- About Welcome Start -->
+  <!-- About Welcome Start -->
+  <div class="dc-haslayout dc-main-section" style="background: white; margin-bottom: 50px;">
+    <!-- User Listing Start-->
+    <div class="container">
+      <div class="row">
+        <div id="dc-twocolumns" class="dc-twocolumns dc-haslayout">
+          <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 col-xl-9 float-left">
+            <div class="dc-searchresult-holder">
+              <div class="dc-searchresult-head">
+                <div class="dc-title">
+                  <h4>{{totalHospitals}} matches found for : <strong> Hospital </strong></h4>
+                </div>
+                <div class="dc-rightarea">
+                  <div class="dc-select">
+                    <select>
+                      <option value="Sort By:"> Sort By : <i class="fa fa-down-arrow"></i>
+                      </option>
+                    </select>
+                  </div>
+                  <div class="dc-gridlist-option">
+                    <a href="javascript:void(0);"><i class="fa fa-th-large"></i></a>
+                    <a href="javascript:void(0);" class="dc-linkactive"><i class="fa fa-bars"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="dc-searchresult-grid dc-searchresult-list dc-searchvlistvtwo">
+                <div class="dc-docpostholder" *ngFor="let  hospital of hospitalList">
+                  <div class="dc-docpostcontent">
+                    <div class="dc-searchvtwo">
+                      <figure class="dc-docpostimg">
+                        <img src="../../../assets/img/doctors/doctors/img-00.jpg" s alt="img description"
+                          style="height: 120px; width: 150px;">
+                        <figcaption>
+                          <span class="dc-featuredtag"><i class="fa fa-bolt"></i></span>
+                        </figcaption>
+                      </figure>
+                      <div class="dc-title">
+                        <a href="javascript:void(0)" class="dc-docstatus">Hospital</a>
+                        <h3><a href="javascript:void(0);">{{hospital.Name}}</a> <i
+                            class="fa fa-award dc-awardtooltip"><em>Medical Registration
+                              Verified</em></i> <i class="fa fa-check-circle dc-awardtooltip"><em>Medical
+                              Registration Verified</em></i>
+                        </h3>
+                        <ul class="dc-docinfo">
+                          <li>
+                            <em>Doctors Onboard: 15263</em>
+                          </li>
+                          <li>
+                            <div class="rating">
+                              <i class="fas fa-star filled"></i>
+                              <i class="fas fa-star filled"></i>
+                              <i class="fas fa-star filled"></i>
+                              <i class="fas fa-star filled"></i>
+                              <i class="fas fa-star"></i>
+                              <span class="d-inline-block average-rating"></span>
+                            </div><em>2100 Feedback</em>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="dc-tags">
+                        <ul>
+                          <li>
+                            <a href="javascript:void(0);">Artificial Teeth</a>
+                          </li>
+                          <li>
+                            <a href="javascript:void(0);">Conservative Dentistry</a>
+                          </li>
+                          <li>
+                            <a href="javascript:void(0);">Crowns and Bridges Fixing</a>
+                          </li>
+                          <li>
+                            <a href="javascript:void(0);">Endosurgery</a>
+                          </li>
+                          <li>
+                            <a href="javascript:void(0);">Fixed Partial Denture (FPD)</a>
+                          </li>
+                          <li>
+                            <a href="javascript:void(0);">Flap Surgery</a>
+                          </li>
+                          <li>
+                            <a href="javascript:void(0);" class="dc-tagviewall">View all</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="dc-doclocation dc-doclocationvtwo">
+                      <span><i
+                          class="fa fa-map-marker"></i>{{hospital.Address}},{{hospital.City}},{{hospital.State}},{{hospital.ZipCode}}</span>
+                      <span><i class="fa fa-calendar"></i> Mo, Tu, <em class="dc-dayon">We</em>,
+                        Th, Fr, Sa</span>
+                      <span><i class="fa fa-thumbs-up"></i> 345 Votes</span>
+                      <span><i class="fa fa-wallet"></i> Starting From $50</span>
+                      <span><i class="fa fa-calendar"></i> <em class="dc-available">Available
+                          Today</em></span>
+                      <div class="dc-btnarea">
+                        <a href="hospital-single.html" class="dc-btn" [routerLink]="['/login']"
+                          (click)="appointmentAlert()">Book Now
+                        </a>
+                        <a href="javascript:void(0);" class="dc-like dc-liked"><i class="fa fa-heart"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <nav class="dc-pagination">
+                  <ul>
+                    <li class="dc-prevpage"><a href="javascrip:void(0);"><i class="fa fa-chevron-left"></i></a></li>
+                    <li><a href="javascrip:void(0);">1</a></li>
+                    <li><a href="javascrip:void(0);">2</a></li>
+                    <li><a href="javascrip:void(0);">3</a></li>
+                    <li><a href="javascrip:void(0);">4</a></li>
+                    <li><a href="javascrip:void(0);">...</a></li>
+                    <li><a href="javascrip:void(0);">50</a></li>
+                    <li class="dc-nextpage"><a href="javascrip:void(0);"><i class="fa fa-chevron-right"></i></a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 col-xl-3 float-left">
+            <aside id="dc-sidebar" class="dc-sidebar dc-sidebar-grid float-left mt-md-0">
+              <div class="dc-widget dc-onlineoptions">
+                <figure class="dc-onlinuserimg">
+                  <img src="../../../assets/img/doctors/doctors/img-11.jpg">
+                  <figcaption><span>Live</span></figcaption>
+                </figure>
+                <div class="dc-onlineoption-content">
+                  <div class="dc-title">
+                    <h3><span>Stop Waiting in Queue</span> Ask Query Online</h3>
+                  </div>
+                  <div class="dc-btnarea">
+                    <a href="javascript:void(0);" class="dc-btn dc-btnactive">Book Audio / Video
+                      Call</a>
+                    <span>50,000+<em>Consultation Served </em></span>
+                  </div>
+                </div>
+              </div>
+              <div class="dc-widget dc-mostsearch-holder">
+                <div class="dc-widgettitle">
+                  <h3>Most Nearby Search</h3>
+                </div>
+                <div class="dc-widgetcontent">
+                  <ul class="dc-mostsearch-content">
+                    <li><a href="javascript:void(0);">Allergy Specialist</a></li>
+                    <li><a href="javascript:void(0);">Andrologist</a></li>
+                    <li><a href="javascript:void(0);">Anesthetist</a></li>
+                    <li><a href="javascript:void(0);">Audiologist</a></li>
+                    <li><a href="javascript:void(0);">Dietitian/Nutritionist</a></li>
+                    <li><a href="javascript:void(0);">Laproscopic Surgeon</a></li>
+                    <li><a href="javascript:void(0);">Maxillofacial Surgeon</a></li>
+                    <li><a href="javascript:void(0);">Orthopedic Surgeon</a></li>
+                    <li><a href="javascript:void(0);">Pediatric Cardiac Surgeon</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="dc-widget dc-mobileappoptions">
+                <figure class="dc-appimgs">
+                  <img src="../../../assets/img/doctors/doctors/img-12.jpg">
+                </figure>
+                <div class="dc-mobileapp-content">
+                  <div class="dc-title">
+                    <h3><span>Care on the GO</span> Get Mobile App</h3>
+                  </div>
+                  <div class="dc-description">
+                    <p>A dipisicing sed dotem eiusmou tempor incididunt ut labore</p>
+                  </div>
+                  <div class="dc-appemail-form">
+                    <input type="email" name="email" value="" class="form-control" placeholder="Email ID" required="">
+                    <button type="submit"><i class="fa fa-paper-plane"></i></button>
+                  </div>
+                </div>
+              </div>
+
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- User Listing End-->
+  </div>
+</main>
+<!-- /Blog Section -->

@@ -1,0 +1,176 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h1 class="mb-3 red">Today's Appointments</h1>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col-md-6 text-left">
+            <div class="form-row">
+              <label for="inputPassword" class="col-sm-2 col-form-label form-inline">Search:</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchItem">
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-6 text-right">
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Show
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="javascript:void(0);">5</a>
+                <a class="dropdown-item" href="javascript:void(0);">10</a>
+                <a class="dropdown-item" href="javascript:void(0);">20</a>
+                <a class="dropdown-item" href="javascript:void(0);">50</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table class="table table-striped" style="width:100%">
+          <thead>
+            <tr>
+              <th>SI.No</th>
+              <th>Patient Name</th>
+              <th>Appt Date</th>
+              <th>Purpose</th>
+              <th>TO Doctor</th>
+              <th>TO Hospital</th>
+              <th>Notes</th>
+              <th class="text-center">Paid Amount(Rs.)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let appointment of appointmentList | filter:searchItem; let i=index">
+              <td>{{i+1}}</td>
+              <td>
+                <h2 class="table-avatar">
+                  <a href="javascript:void(0);" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle"
+                      src="{{ImageURL}}{{appointment.UsersURL}}"
+                      (click)="openProfile(profileModal, appointment.UsersURL)"></a>
+                  <a href="javascript:void(0);" (click)="open(mymodal, appointment.UserId)">
+                    {{appointment.UserFirstName}} {{appointment.UserLastName}}
+                  </a>
+                </h2>
+              </td>
+              <td>
+                {{appointment.SlotTime| date:'dd-MM-yyyy'}}
+                <span class=" d-block text-info">{{appointment.SlotTime| date:'hh:mm a':'GMT+05:30'}}</span>
+              </td>
+              <td>{{appointment.Specialization}}</td>
+              <td>{{appointment.DoctorFirstName}} {{appointment.DoctorLastName}}</td>
+              <td>{{appointment.HospitalName}}</td>
+              <td class="text-center">{{appointment.ConsultationFee}}</td>
+              <td>{{appointment.Notes}}</td>
+              <td class="text-center">
+                <div class="table-action">
+                  <a href="javascript:void(0);" (click)="acceptAppointment(appointment.Id, appointment.UserId)"
+                    *ngIf="appointment.Status == 'inactive'" class="btn btn-sm bg-success-light">
+                    <i class="fas fa-check"></i> Accept
+                  </a>
+                  <span *ngIf="appointment.Status == 'inactive'">&nbsp;&nbsp;</span>
+                  <a href="javascript:void(0);" class="btn btn-sm bg-success-light"
+                    *ngIf="appointment.Status == 'active'">
+                    <i class="fas fa-check"></i> Accepted
+                  </a>
+                  <a href="javascript:void(0);" class="btn btn-sm bg-danger-light"
+                    *ngIf="appointment.Status == 'inactive'"
+                    (click)="cancelAppointment(appointment.Id, appointment.UserId)">
+                    <i class="fas fa-times"></i> Cancel
+                  </a>
+                  <a href="javascript:void(0);" class="btn btn-sm bg-danger-light"
+                    *ngIf="appointment.Status == 'cancelled'">
+                    <i class="fas fa-times"></i> Cancelled
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="appointmentListLength == 0">
+            <tr>
+              <td colspan="10" class="tableEmptyDataMsg">
+                Sorry, Today No Appointments
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      User History
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table id="ejemplo" class="table table-striped" style="width:100%">
+          <thead>
+            <tr>
+              <th>SI.No</th>
+              <th>Doctor</th>
+              <th>Hospital</th>
+              <th>Appt Date</th>
+              <th>Booking Date</th>
+              <th>Amount(Rs.)</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let userHistory of userHistoryList | filter:searchItem; let i=index">
+              <td>{{i+1}}</td>
+              <td>
+                <h2 class="table-avatar">
+                  <a href="javascript:void(0);" class="avatar avatar-sm mr-2">
+                    <img class="avatar-img rounded-circle" src="../../../assets/img/doctors/doctor-thumb-02.jpg"
+                      alt="User Image">
+                  </a>
+                  <a href="javascript:void(0);">Dr.{{userHistory.DoctorFirstName}}
+                    {{userHistory.DoctorLastName}}<span>{{userHistory.Specialization}}</span></a>
+                </h2>
+              </td>
+              <td>{{userHistory.HospitalName}}</td>
+              <td>{{userHistory.SlotTime | date:'dd-MM-yyyy'}}
+                <span class="d-block text-info">{{userHistory.SlotTime | date:'hh:mm a':'GMT+05:30'}}</span>
+              </td>
+              <td *ngIf="userHistory.UpdatedDate == null">
+                {{userHistory.CreatedDate | date:'dd-MM-yyyy'}}
+                <span class="d-block text-info"> {{userHistory.CreatedDate | date:'hh:mm a':'GMT+05:30'}}</span>
+              </td>
+              <td *ngIf="userHistory.UpdatedDate != null">
+                {{userHistory.UpdatedDate | date:'dd-MM-yyyy'}}
+                <span class="d-block text-info">{{userHistory.UpdatedDate | date:'hh:mm a':'GMT+05:30'}}</span>
+              </td>
+              <td>{{userHistory.ConsultationFee}}</td>
+              <td>{{userHistory.Notes}}</td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="userHistoryListLength == 0">
+            <tr>
+              <td colspan="9" class="tableEmptyDataMsg">User History not Available</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #profileModal let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img src="{{ImageURL}}{{userimageURL}}" alt="Failed to Load">
+  </div>
+</ng-template>

@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="mb-4 red"> Patient List</h3>
+        <a href="javascript:void(0);"> <button class="btn btn-success btn-sm float-right"
+            style="margin-bottom: 27px; margin-left: 25px;">ADD Appointments</button></a>
+        <div class="btn-group">
+          <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false" style="color: white;">OP/IP List</button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="javascript:void(0);">Out Patients</a>
+            <a class="dropdown-item" href="javascript:void(0);">In Patients</a>
+          </div>
+        </div>
+        <a href="javascript:void(0);"> <button class="btn btn-info btn-sm float-right">ADD Archieve</button></a>
+        <div class="table-responsive">
+          <div class="table-responsive">
+            <div class="row">
+              <div class="form-group col-md-6 text-left">
+                <div class="form-row">
+                  <label for="inputPassword" class="col-sm-2 col-form-label form-inline">Search:</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchItem">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>SI.No</th>
+                    <th>Patient Name</th>
+                    <th>Appt Date</th>
+                    <th>Purpose</th>
+                    <th>TO Doctor</th>
+                    <th>TO Hospital</th>
+                    <th>Status</th>
+                    <th class="text-center">Paid Amount</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let appointment of appointmentList | filter:searchItem; let i=index">
+                    <td>{{i+1}}</td>
+                    <td>
+                      <h2 class="table-avatar">
+                        <a href="javascript:void(0);" class="avatar avatar-sm mr-2"><img
+                            class="avatar-img rounded-circle" src="{{ImageURL}}{{appointment.UsersURL}}">
+                        </a>
+                        <a href="javascript:void(0);">{{appointment.UserFirstName}} {{appointment.UserLastName}}</a>
+                      </h2>
+                    </td>
+                    <td>
+                      {{appointment.SlotTime| date:'dd-MM-yyyy'}}
+                      <span class="d-block text-info">{{appointment.SlotTime| date:'hh:mm a':'GMT+05:30'}}</span>
+                    </td>
+                    <td>{{appointment.Specialization}}</td>
+                    <td>{{appointment.DoctorFirstName}} {{appointment.DoctorLastName}}</td>
+                    <td>{{appointment.HospitalName}}</td>
+                    <div class="form-group">
+                      <select class="form-control select" [(ngModel)]="appointment.PatientStatus">
+                        <option value="OP">OP</option>
+                        <option value="IP">IP</option>
+                      </select>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-info"
+                      (click)="changePatientStatus(appointment.Id, appointment.UserId, appointment.PatientStatus)">Save</button>
+                    <td class="text-center">{{appointment.ConsultationFee}}</td>
+                    <td>{{appointment.Notes}}</td>
+                    <!-- <td class="text-center">
+                      <div class="table-action">
+                        <a href="javascript:void(0);" *ngIf="appointment.Status == 'inactive'"
+                          class="btn btn-sm bg-success-light">
+                          <i class="fas fa-check"></i> Accept
+                        </a>
+                        <span *ngIf="appointment.Status == 'inactive'">&nbsp;&nbsp;</span>
+                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light"
+                          *ngIf="appointment.Status == 'active'">
+                          <i class="fas fa-check"></i> Accepted
+                        </a>
+                      </div>
+                    </td> -->
+                  </tr>
+                </tbody>
+                <tbody *ngIf="appointmentListLength == 0">
+                  <tr>
+                    <td colspan="10" class="tableEmptyDataMsg">
+                      Sorry, Appointments Not Available
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

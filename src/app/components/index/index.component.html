@@ -1,0 +1,615 @@
+<!-- Home Banner -->
+<section class="section section-search">
+  <div class="container-fluid">
+    <div class="banner-wrapper">
+      <div class="banner-header text-center">
+        <h1>Search Hospital,Doctor Make an Appointment</h1>
+        <p>Discover the best doctors, clinic & hospital the city nearest to you.</p>
+      </div>
+
+      <!-- Search -->
+      <div class="search-box">
+        <form action="index.html">
+          <div class="form-group search-location">
+            <input type="text" class="form-control" placeholder="Search Location">
+            <span class="form-text">Based on your Location</span>
+          </div>
+          <div class="form-group search-info">
+            <input type="text" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+            <span class="form-text">Ex : Dental or Sugar Check up etc</span>
+          </div>
+          <button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i>
+            <span>Search</span></button>
+        </form>
+      </div>
+      <!-- /Search -->
+
+    </div>
+  </div>
+</section>
+<!-- /Home Banner -->
+
+<section class="how-it-works sec-pad1">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2>How It <span class="red">Works</span></h2>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-6 col-xs-12 arrow">
+        <div class="single-how-it-works text-center">
+          <div class="icon-box">
+            <i class="fa fa-user"></i>
+            <div class="count">01</div><!-- /.count -->
+          </div><!-- /.icon-box -->
+          <h3>Create A Account </h3>
+        </div><!-- /.single-how-it-works text-center -->
+      </div><!-- /.col-md-4 -->
+      <div class="col-md-2 col-sm-6 col-xs-12">
+        <div class="single-how-it-works text-center">
+          <div class="icon-box">
+            <i class="fa fa-file"></i>
+            <div class="count">02</div><!-- /.count -->
+          </div><!-- /.icon-box -->
+          <h3>Medical History </h3>
+        </div><!-- /.single-how-it-works text-center -->
+      </div><!-- /.col-md-4 -->
+      <div class="col-md-2 col-sm-6 col-xs-12">
+        <div class="single-how-it-works text-center">
+          <div class="icon-box">
+            <i class="fa fa-user-md"></i>
+            <div class="count">03</div><!-- /.count -->
+          </div><!-- /.icon-box -->
+          <h3>Book Appointment </h3>
+        </div><!-- /.single-how-it-works text-center -->
+      </div><!-- /.col-md-4 -->
+      <div class="col-md-2 col-sm-6 col-xs-12">
+        <div class="single-how-it-works text-center">
+          <div class="icon-box">
+            <i class="fa fa-stethoscope"></i>
+            <div class="count">04</div><!-- /.count -->
+          </div><!-- /.icon-box -->
+          <h3>Get Treatment</h3>
+        </div><!-- /.single-how-it-works text-center -->
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="single-how-it-works text-center">
+          <div class="icon-box">
+            <i class="fa fa-wallet"></i>
+            <div class="count">05</div><!-- /.count -->
+          </div><!-- /.icon-box -->
+          <h3>Get Cashback</h3>
+
+        </div><!-- /.single-how-it-works text-center -->
+      </div><!-- /.col-md-4 -->
+    </div><!-- /.row -->
+  </div><!-- /.thm-container -->
+</section><!-- /.how-it-works -->
+
+
+
+
+<section class="dc-haslayout dc-main-section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+        <div class="row">
+          <div class="dc-ratedecontent dc-bgcolor" style="padding: 40px 30px 40px !important;">
+            <figure class="dc-Apollos-img">
+              <img src="assets/img/doctors/doctors/img-14.jpg" alt="img description" style="margin-top: -50px;">
+            </figure>
+            <div class="dc-sectionhead dc-sectionheadvtwo dc-text-center">
+              <div class="dc-sectiontitle">
+                <h2>Our Top Rated<span>Hospitals</span></h2>
+              </div>
+              <div class="dc-description">
+                <p>Lorem ipsum dolor amet consectetur adipisicing eliuim sete eiusmod tempor incididunt.</p>
+              </div>
+            </div>
+            <div class="dc-btnarea">
+              <a href="hospitals.html"><button type="button" class="btn btn-sm btn-info">View All</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
+        <div class="doctor-slider slider">
+
+          <!-- Doctor Widget -->
+          <div class="profile-widget" *ngFor="let hospital of hospitalList">
+            <div class="doc-img">
+              <a href="#">
+                <img class="img-fluid" onerror="this.src='../../../assets/img/doctors/doctors/img-00.jpg';"
+                  src="{{ImageURL}}{{hospital.ImageUrl}}">
+              </a>
+              <a href="javascript:void(0)" class="fav-btn">
+                <i class="far fa-bookmark"></i>
+              </a>
+            </div>
+            <div class="pro-content">
+              <h3 class="title">
+                <a href="#">{{hospital.Name}}</a>
+                <i class="fas fa-check-circle verified"></i>
+              </h3>
+              <p class="speciality">MDS - Periodontology and Oral Implantology, BDS</p>
+              <div class="rating">
+                <i class="fas fa-star filled"></i>
+                <i class="fas fa-star filled"></i>
+                <i class="fas fa-star filled"></i>
+                <i class="fas fa-star filled"></i>
+                <i class="fas fa-star filled"></i>
+                <span class="d-inline-block average-rating">(17)</span>
+              </div>
+              <ul class="available-info">
+                <li>
+                  <i class="fas fa-map-marker-alt"></i> {{hospital.City}}, {{hospital.State}}
+                </li>
+                <li>
+                  <i class="far fa-clock"></i> Mon-Sat (24/7)
+                </li>
+              </ul>
+              <div class="row row-sm">
+                <div class="col-12">
+                  <a href="hospitals.html" class="btn book-btn">Book Now</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- Clinic and Specialities -->
+<section class="section section-specialities">
+  <div class="container-fluid">
+    <div class="section-header text-center">
+      <h2>Clinic and <span class="red">Specialities</span></h2>
+      <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua.</p>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-9">
+        <!-- Slider -->
+        <div class="specialities-slider slider">
+          <!-- Slider Item -->
+          <div class="speicality-item text-center" *ngFor="let specializations of specializationsList">
+            <div class="speicality-img">
+              <a href="hospitals.html"><img src="assets/img/specialities/specialities-01.png" class="img-fluid"
+                  alt="Speciality">
+                <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+              </a>
+            </div>
+            <p>{{specializations.Specialization}}</p>
+          </div>
+          <!-- /Slider Item -->
+        </div>
+        <!-- /Slider -->
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Clinic and Specialities -->
+
+
+<section class="both-side-half-bg">
+  <div class="single-item">
+    <div class="section-heading heading-dark heading-layout5">
+      <h2>Our Latest <span class="red">News</span></h2>
+    </div>
+    <div class="blog-box-layout1">
+      <h3 class="item-title"><a href="single-news.html">My dental office need a blog area galley
+          printingdern care to ailing dear.</a></h3>
+      <ul class="entry-meta">
+        <li><i class="far fa-calendar-alt"></i>21 July, 20 18</li>
+        <li><i class="fas fa-user"></i>Posted by <a href="#">admin</a></li>
+      </ul>
+    </div>
+    <div class="blog-box-layout1">
+      <h3 class="item-title"><a href="single-news.html">My dental office need a blog area galley
+          printingdern care to ailing dear.</a></h3>
+      <ul class="entry-meta">
+        <li><i class="far fa-calendar-alt"></i>21 July, 20 18</li>
+        <li><i class="fas fa-user"></i>Posted by <a href="#">admin</a></li>
+      </ul>
+    </div>
+    <a class="blog-btn" href="news1.html">SEE ALL NEWS<i class="fas fa-chevron-right"></i></a>
+  </div>
+  <div class="single-item bg-common" data-bg-image="img/figure/figure9.png">
+    <div class="section-heading heading-light heading-layout5">
+      <h2>Testimonials</h2>
+      <div id="owl-nav3" class="owl-nav-layout2">
+        <span class="rt-prev">
+          <i class="fas fa-chevron-left"></i>
+        </span>
+        <span class="rt-next">
+          <i class="fas fa-chevron-right"></i>
+        </span>
+      </div>
+    </div>
+    <div class="rc-carousel nav-control-layout7" data-loop="true" data-items="4" data-margin="30" data-autoplay="false"
+      data-autoplay-timeout="5000" data-custom-nav="#owl-nav3" data-smart-speed="2000" data-dots="false"
+      data-nav="false" data-nav-speed="false" data-r-x-small="1" data-r-x-small-nav="true" data-r-x-small-dots="false"
+      data-r-x-medium="1" data-r-x-medium-nav="false" data-r-x-medium-dots="false" data-r-small="1"
+      data-r-small-nav="false" data-r-small-dots="false" data-r-medium="1" data-r-medium-nav="false"
+      data-r-medium-dots="false" data-r-large="1" data-r-large-nav="false" data-r-large-dots="false"
+      data-r-extra-large="1" data-r-extra-large-nav="false" data-r-extra-large-dots="false">
+      <div class="item">
+        <div class="testmonial-box-layout2">
+          <h4 class="item-title">Josef Ardogan <span>/ CEO Artland</span></h4>
+          <ul class="rating">
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+          </ul>
+          <p>"Eodem modo typi, qui nunc nobis videntur parum clar fiant sollemnes in futurum. Lorem
+            ipsum dolor sit amet tetuer adipiscing elit, sed diam nonu."</p>
+        </div>
+        <div class="testmonial-box-layout2">
+          <h4 class="item-title">Josef Ardogan <span>/ CEO Artland</span></h4>
+          <ul class="rating">
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+          </ul>
+          <p>"Eodem modo typi, qui nunc nobis videntur parum clar fiant sollemnes in futurum."</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="testmonial-box-layout2">
+          <h4 class="item-title">Josef Ardogan <span>/ CEO Artland</span></h4>
+          <ul class="rating">
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+          </ul>
+          <p>"Eodem modo typi, qui nunc nobis videntur parum clar fiant sollemnes in futurum. Lorem
+            ipsum dolor sit amet tetuer adipiscing elit, sed diam nonu."</p>
+        </div>
+        <div class="testmonial-box-layout2">
+          <h4 class="item-title">Josef Ardogan <span>/ CEO Artland</span></h4>
+          <ul class="rating">
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+            <li>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </li>
+          </ul>
+          <p>"Eodem modo typi, qui nunc nobis videntur parum clar fiant sollemnes in futurum."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Availabe Features -->
+<section class="section section-features">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 features-img">
+        <img src="assets/img/features/feature.png" class="img-fluid" alt="Feature">
+        <section class="home-newsletter">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="single">
+                  <h2>Subscribe to our Newsletter</h2>
+                  <div class="input-group">
+                    <input type="email" class="form-control" placeholder="Enter your email">
+                    <span class="input-group-btn">
+                      <button class="btn btn-theme" type="submit">Subscribe</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="col-md-2 features-img1">
+        <img src="assets/img/app-store.png" class="img-fluid" alt="Feature" style="margin-bottom: 20px;">
+        <img src="assets/img/play-store.png" class="img-fluid" alt="Feature">
+      </div>
+      <div class="col-md-7">
+        <div class="section-header">
+          <h2 class="mt-2">Available <span class="red">Features</span></h2>
+          <p>It is a long established fact that a reader will be distracted by the readable content of a page when
+            looking at its layout. </p>
+        </div>
+        <div class="features-slider slider">
+          <!-- Slider Item -->
+          <div class="feature-item text-center">
+            <a href="pharmacy.html"><img src="assets/img/features/feature-06.jpg" class="img-fluid" alt="Feature">
+              <p>Pharmacy</p>
+            </a>
+
+          </div>
+          <!-- /Slider Item -->
+
+          <!-- Slider Item -->
+
+          <!-- /Slider Item -->
+
+          <!-- Slider Item -->
+          <div class="feature-item text-center">
+            <a href="#"><img src="assets/img/features/feature-03.jpg" class="img-fluid" alt="Feature">
+              <p>Health Insurance</p>
+            </a>
+
+          </div>
+          <!-- /Slider Item -->
+
+          <!-- Slider Item -->
+          <div class="feature-item text-center">
+            <a href="diagnostic-services.html"><img src="assets/img/features/feature-04.jpg" class="img-fluid"
+                alt="Feature">
+              <p>Diagnostics</p>
+            </a>
+
+          </div>
+          <!-- /Slider Item -->
+
+          <!-- Slider Item -->
+          <div class="feature-item text-center">
+            <a href="Ambulance.html"> <img src="assets/img/features/feature-05.jpg" class="img-fluid" alt="Feature">
+              <p>Ambulance</p>
+            </a>
+
+          </div>
+          <!-- /Slider Item -->
+
+          <!-- Slider Item -->
+          <div class="feature-item text-center">
+            <a href="hospitals.html"><img src="assets/img/features/feature-06.jpg" class="img-fluid" alt="Feature">
+              <p>Medicals</p>
+            </a>
+          </div>
+          <!-- /Slider Item -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Availabe Features -->
+<!-- /portfolio -->
+<section class="portfolio section">
+  <div class="container">
+    <div class="">
+      <h2 class="career">Career
+        <span class="red" style="text-align: center">Objectives</span></h2>
+    </div>
+
+    <div class="filters">
+      <ul>
+        <li class="active" data-filter="*">All</li>
+        <li data-filter=".corporate">Neurology</li>
+        <li data-filter=".personal">Cardiology</li>
+        <li data-filter=".agency">Nephrology</li>
+        <li data-filter=".portal">Neurology</li>
+      </ul>
+    </div>
+
+    <div class="filters-content">
+      <div class="row grid">
+        <div class="col-sm-4 all corporate">
+          <div class="item">
+            <img src="assets/img/neurolgy.jpg" alt="Work 1">
+            <div class="p-inner">
+              <h5>Work 1</h5>
+
+              <div class="cat">Neurology</div>
+              <div class="cat"><a href="#">Link Url</a></div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 all personal">
+          <div class="item">
+            <img src="assets/img/cardio.jpg" alt="Work 1">
+            <div class="p-inner">
+              <h5>Work 1</h5>
+              <div class="cat">Cardiology</div>
+              <div class="cat"><a href="#">Link Url</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 all agency">
+          <div class="item">
+            <img src="assets/img/nephro.png" alt="Work 1">
+            <div class="p-inner">
+              <h5>Work 1</h5>
+              <div class="cat">Nephrology</div>
+              <div class="cat"><a href="#">Link Url</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 all portal">
+          <div class="item">
+            <img src="assets/img/neurolgy.jpg" alt="Work 1">
+            <div class="p-inner">
+              <h5>Work 1</h5>
+              <div class="cat">Neurology</div>
+              <div class="cat"><a href="#">Link Url</a></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- /portfolio -->
+
+
+
+
+<!-- Blog Section -->
+<section class="section section-blogs">
+  <div class="container-fluid">
+
+    <!-- Section Header -->
+    <div class="section-header text-center">
+      <h2>Blogs and <span class="red">News</span> </h2>
+      <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua.</p>
+    </div>
+    <!-- /Section Header -->
+
+    <div class="row blog-grid-row">
+      <div class="col-md-6 col-lg-3 col-sm-12">
+
+        <!-- Blog Post -->
+        <div class="blog grid-blog">
+          <div class="blog-image">
+            <a href="blog-details.html"><img class="img-fluid" src="assets/img/blog/blog-01.jpg" alt="Post Image"></a>
+          </div>
+          <div class="blog-content">
+            <ul class="entry-meta meta-item">
+              <li>
+                <div class="post-author">
+                  <a href="#"><img src="assets/img/doctors/doctor-thumb-01.jpg" alt="Post Author"> <span>Dr. Ruby
+                      Perrin</span></a>
+                </div>
+              </li>
+              <li><i class="far fa-clock"></i> 4 Dec 2019</li>
+            </ul>
+            <h3 class="blog-title"><a href="blog-details.html">Mymdesidesk – Making your clinic painless visit?</a>
+            </h3>
+            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor.</p>
+          </div>
+        </div>
+        <!-- /Blog Post -->
+
+      </div>
+      <div class="col-md-6 col-lg-3 col-sm-12">
+
+        <!-- Blog Post -->
+        <div class="blog grid-blog">
+          <div class="blog-image">
+            <a href="blog-details.html"><img class="img-fluid" src="assets/img/blog/blog-02.jpg" alt="Post Image"></a>
+          </div>
+          <div class="blog-content">
+            <ul class="entry-meta meta-item">
+              <li>
+                <div class="post-author">
+                  <a href="#"><img src="assets/img/doctors/doctor-thumb-02.jpg" alt="Post Author"> <span>Dr. Darren
+                      Elder</span></a>
+                </div>
+              </li>
+              <li><i class="far fa-clock"></i> 3 Dec 2019</li>
+            </ul>
+            <h3 class="blog-title"><a href="blog-details.html">What are the benefits of Online Doctor Booking?</a>
+            </h3>
+            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor.</p>
+          </div>
+        </div>
+        <!-- /Blog Post -->
+
+      </div>
+      <div class="col-md-6 col-lg-3 col-sm-12">
+
+        <!-- Blog Post -->
+        <div class="blog grid-blog">
+          <div class="blog-image">
+            <a href="blog-details.html"><img class="img-fluid" src="assets/img/blog/blog-03.jpg" alt="Post Image"></a>
+          </div>
+          <div class="blog-content">
+            <ul class="entry-meta meta-item">
+              <li>
+                <div class="post-author">
+                  <a href="#"><img src="assets/img/doctors/doctor-thumb-03.jpg" alt="Post Author"> <span>Dr. Deborah
+                      Angel</span></a>
+                </div>
+              </li>
+              <li><i class="far fa-clock"></i> 3 Dec 2019</li>
+            </ul>
+            <h3 class="blog-title"><a href="blog-details.html">Benefits of consulting with an Online Doctor</a></h3>
+            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor.</p>
+          </div>
+        </div>
+        <!-- /Blog Post -->
+
+      </div>
+      <div class="col-md-6 col-lg-3 col-sm-12">
+
+        <!-- Blog Post -->
+        <div class="blog grid-blog">
+          <div class="blog-image">
+            <a href="blog-details.html"><img class="img-fluid" src="assets/img/blog/blog-04.jpg" alt="Post Image"></a>
+          </div>
+          <div class="blog-content">
+            <ul class="entry-meta meta-item">
+              <li>
+                <div class="post-author">
+                  <a href="#"><img src="assets/img/doctors/doctor-thumb-04.jpg" alt="Post Author"> <span>Dr. Sofia
+                      Brient</span></a>
+                </div>
+              </li>
+              <li><i class="far fa-clock"></i> 2 Dec 2019</li>
+            </ul>
+            <h3 class="blog-title"><a href="blog-details.html">5 Great reasons to use an Online Doctor</a></h3>
+            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor.</p>
+          </div>
+        </div>
+        <!-- /Blog Post -->
+
+      </div>
+    </div>
+    <div class="view-all text-center">
+      <a href="blog-list.html" class="btn btn-primary">View All</a>
+    </div>
+  </div>
+</section>
+<!-- /Blog Section -->

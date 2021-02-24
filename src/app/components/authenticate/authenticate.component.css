@@ -1,0 +1,20 @@
+.errMsg {
+  color: rgb(240, 42, 8);
+  font-weight: bold;
+}
+
+.setBox {
+  text-align: centre;
+  margin: 0px auto;
+  display: block;
+}
+/* .login-form {
+  background: url(assets/img/medical-care.jpg);
+  background-size: cover;
+  overflow-x: hidden;
+} */
+
+.OTPMsg {
+  color: rgb(50, 8, 240);
+  font-weight: bold;
+}

@@ -1,0 +1,362 @@
+<div class="card">
+  <div class="col-md-12">
+    <div class="card-header card-header-danger">
+      <h1 class="card-title">KYC <span style="color: #02dca4"> &nbsp; Upload Documents</span></h1>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title" style="color: #02dca4">
+        Insured&nbsp;&nbsp;&nbsp;<span class="badge badge-pill bg-info-light">Approved</span>
+      </h4>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <form [formGroup]="insuranceDataForm" (ngSubmit)="savePatientInsurance()">
+                <div class="form-row" *ngFor="let pInsu of patientInsuranceDetails; let i = index;">
+                  <span *ngIf="i >0"><br><br></span>
+                  <div class="row">
+                    <div class="form-group col-lg-11 col-12 col-md-11 radioPadding form-inline">
+                      <div class="check-box" style="float: left;margin-right: 20px; margin-bottom: 20px;">
+                        <button type="button" class="btn btn-sm btn-primary" style="width: 40px;">
+                          <span class="badge badge-primary">{{i+1}}
+                          </span>
+                        </button>
+                      </div>
+                      <div class="check-box" style="float: left;margin-right: 20px; margin-bottom: 20px;">
+                        <input type="radio" formControlName="insuranceTypeIn_{{i}}" name="insuranceTypeIn_{{i}}"
+                          value="NonInsured" [(ngModel)]="pInsu.InsuranceType">
+                        Non-Insured
+                      </div>
+                      <div class="check-box" style="float: left;margin-right: 20px; margin-bottom: 20px;">
+                        <input type="radio" formControlName="insuranceTypeIn_{{i}}" name="insuranceTypeIn_{{i}}"
+                          value="Individual" [(ngModel)]="pInsu.InsuranceType">
+                        Individual
+                      </div>
+                      <div class="check-box" style="float: left;margin-right: 20px; margin-bottom: 20px;">
+                        <input type="radio" formControlName="insuranceTypeIn_{{i}}" name="insuranceTypeIn_{{i}}"
+                          value="Corporate" [(ngModel)]="pInsu.InsuranceType">
+                        Corporate
+                      </div>
+                      <!-- <div class="check-box" style="float: left;margin-right: 20px; margin-bottom: 20px;">
+                        <select class="form-control" formControlName="insuranceTypeIn" [(ngModel)]="pInsu.InsuranceType"
+                          name="insuranceTypeIn">
+                          <option value="">Select</option>
+                          <option value="NonInsured">NonInsured</option>
+                          <option value="Individual">Individual</option>
+                          <option value="Corporate">Corporate</option>
+                        </select>
+                      </div> -->
+                    </div>
+                    <div class="col-12 col-md-1 labelPadding pull-right" *ngIf="patientInsuranceDetails.length > 1">
+                      <div class="">
+                        <a href="javascript:void(0);" class="btn btn-danger trash" (click)="removeMember(i)">
+                          <i class="fa fa-times"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="form-group col-12 col-md-3 labelPadding">
+                      <label>First Name</label>
+                      <input type="text" class="form-control" formControlName="Name_{{i}}" name="Name_{{i}}"
+                        [(ngModel)]="pInsu.Name" (keypress)="allowOnlyChar($event)"
+                        [ngClass]="{ 'is-invalid': submitted && getControl('Name',i).errors}" />
+                      <div *ngIf="submitted && getControl('Name',i).errors" class="invalid-feedback">
+                        <div *ngIf="getControl('Name',i).errors.required">First Name is required</div>
+                      </div>
+                    </div>
+                    <div class="form-group col-12 col-md-3 labelPadding">
+                      <label>Relation</label>
+                      <select class="form-control" formControlName="Relationship_{{i}}" name="Relationship_{{i}}"
+                        [(ngModel)]="pInsu.Relation"
+                        [ngClass]="{ 'is-invalid': submitted && getControl('Relationship',i).errors}">
+                        <option value="">Select</option>
+                        <option value="Self">Self</option>
+                        <option value="Father">Father</option>
+                        <option value="Mother">Mother</option>
+                        <option value="Spouse">Spouse</option>
+                        <option value="Child1">Child 1</option>
+                        <option value="Child2">Child 2</option>
+                      </select>
+                      <div *ngIf="submitted && getControl('Relationship',i).errors" class="invalid-feedback">
+                        <div *ngIf="getControl('Relationship',i).errors.required">Relation is required</div>
+                      </div>
+                    </div>
+                    <div class="form-group col-12 col-md-3 labelPadding">
+                      <label>Gender</label>
+                      <select class="form-control" formControlName="Gender_{{i}}" name="Gender_{{i}}"
+                        [(ngModel)]="pInsu.Gender"
+                        [ngClass]="{ 'is-invalid': submitted && getControl('Gender',i).errors}">
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
+                      <div *ngIf="submitted && getControl('Gender',i).errors" class="invalid-feedback">
+                        <div *ngIf="getControl('Gender',i).errors.required">Gender is required</div>
+                      </div>
+                    </div>
+                    <div class="form-group col-12 col-md-3 labelPadding">
+                      <label>Age</label>
+                      <input type="text" class="form-control" formControlName="Age_{{i}}" name="Age_{{i}}"
+                        [(ngModel)]="pInsu.Age" (keypress)="numbersOnly($event)"
+                        [ngClass]="{ 'is-invalid': submitted && getControl('Age',i).errors}" />
+                      <div *ngIf="submitted && getControl('Age',i).errors" class="invalid-feedback">
+                        <div *ngIf="getControl('Age',i).errors.required">Age is required</div>
+                      </div>
+                    </div>
+                    <div class="form-group col-12 col-md-3 labelPadding" *ngIf="pInsu.InsuranceType=='Corporate'">
+                      <label>Employee Id</label>
+                      <input type="text" class="form-control" formControlName="EmployeeId_{{i}}" name="EmployeeId_{{i}}"
+                        [(ngModel)]="pInsu.EmployeeId"
+                        [ngClass]="{ 'is-invalid': submitted && getControl('EmployeeId',i).errors}" />
+                      <div *ngIf="submitted && getControl('EmployeeId',i).errors" class="invalid-feedback">
+                        <div *ngIf="getControl('EmployeeId',i).errors.required">ID is required</div>
+                      </div>
+                    </div>
+                    <div class="form-group col-12 col-md-3 labelPadding" *ngIf="pInsu.InsuranceType=='Corporate'">
+                      <label>Company Name</label>
+                      <input type="text" class="form-control" formControlName="CompanyName_{{i}}"
+                        name="CompanyName_{{i}}" [(ngModel)]="pInsu.CompanyName" (keypress)="allowOnlyChar($event)"
+                        [ngClass]="{ 'is-invalid': submitted && getControl('CompanyName',i).errors}" />
+                      <div *ngIf="submitted && getControl('CompanyName',i).errors" class="invalid-feedback">
+                        <div *ngIf="getControl('CompanyName',i).errors.required">Company Name is required</div>
+                      </div>
+                    </div>
+                    <div class="form-group col-12 col-md-3 labelPadding" *ngIf="pInsu.InsuranceType=='Corporate'">
+                      <label>&nbsp;</label>
+                      <span>&nbsp;</span>
+                    </div>
+                    <div class="form-group col-12 col-md-3 labelPadding" *ngIf="pInsu.InsuranceType=='Corporate'">
+                      <label>&nbsp;</label>
+                      <span>&nbsp;</span>
+                    </div>
+                    <div class="col-12 col-md-6 labelPadding">
+                      <div class="form-group mb-0">
+                        <label>Aadhar Card</label>
+                        <input type="file" class="form-control" formControlName="aadharCard_{{i}}"
+                          name="aadharCard_{{i}}" (change)="onSelectFile($event,pInsu,'Adhar')"
+                          (keypress)="numbersOnly($event)"
+                          [ngClass]="{ 'is-invalid': submitted && getControl('aadharCard',i).errors}" />
+                        <small class="text-secondary">Size : <b>30Kb</b></small>&nbsp;&nbsp;
+                        <small class="text-secondary">Accept formats : png and Pdf</small>
+                        <small class="text-secondary">{{pInsu.AadharCardURL}}</small>
+                        <div *ngIf="submitted && getControl('aadharCard',i).errors" class="invalid-feedback">
+                          <div *ngIf="getControl('aadharCard',i).errors.required">Aadhar Card is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-6 labelPadding">
+                      <div class="form-group mb-0">
+                        <label> Medical History</label>
+                        <input type="file" class="form-control" formControlName="MedicalHistory_{{i}}"
+                          name="MedicalHistory_{{i}}" (change)="onSelectFile($event,pInsu,'MedicalHistory')"
+                          (keypress)="numbersOnly($event)"
+                          [ngClass]="{ 'is-invalid': submitted && getControl('MedicalHistory',i).errors}" />
+                        <small class="text-secondary">Size : <b>30Kb</b></small>&nbsp;&nbsp;
+                        <small class="text-secondary">Accept formats : png and Pdf</small>
+                        <small class="text-secondary">{{pInsu.MedicalHistoryURL}}</small>
+                        <div *ngIf="submitted && getControl('MedicalHistory',i).errors" class="invalid-feedback">
+                          <div *ngIf="getControl('MedicalHistory',i).errors.required">Medical History is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-6 labelPadding"
+                      *ngIf="pInsu.InsuranceType=='Individual' || pInsu.InsuranceType=='Corporate'">
+                      <div class="form-group mb-0">
+                        <label>Insurance Card</label>
+                        <input type="file" class="form-control" formControlName="InsuranceCard_{{i}}"
+                          name="InsuranceCard_{{i}}" (change)="onSelectFile($event,pInsu,'Insurance')"
+                          (keypress)="numbersOnly($event)"
+                          [ngClass]="{ 'is-invalid': submitted && getControl('InsuranceCard',i).errors}" />
+                        <small class="text-secondary">Size : <b>30Kb</b></small>&nbsp;&nbsp;
+                        <small class="text-secondary">Accept formats : png and Pdf</small>
+                        <small class="text-secondary">{{pInsu.InsuranceCardURL}}</small>
+                        <div *ngIf="submitted && getControl('InsuranceCard',i).errors" class="invalid-feedback">
+                          <div *ngIf="getControl('InsuranceCard',i).errors.required">Insurance Card is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-6 labelPadding" *ngIf="pInsu.InsuranceType=='Corporate'">
+                      <div class="form-group mb-0">
+                        <label>CorporateIdCard</label>
+                        <input type="file" class="form-control" formControlName="CorporateIdCard_{{i}}"
+                          name="CorporateIdCard_{{i}}" (change)="onSelectFile($event,pInsu,'CorporateCard')"
+                          [ngClass]="{ 'is-invalid': submitted && getControl('CorporateIdCard',i).errors}" />
+                        <div *ngIf="submitted && getControl('CorporateIdCard',i).errors" class="invalid-feedback">
+                          <div *ngIf="getControl('CorporateIdCard',i).errors.required">Corporate Id Card required</div>
+                        </div>
+                        <small class="text-secondary">Size : <b>30Kb</b></small><br>
+                        <small class="text-secondary">Accepted formats : png and Pdf</small>
+                        <small class="text-secondary">{{pInsu.CorporateIdCardURL}}</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="add-more" style="margin-top: 25px;">
+                  <a href="javascript:void(0);" class="add-award" (click)="addNewMember()">
+                    <i class="fa fa-plus-circle"></i> Add Member
+                  </a>
+                </div>
+                <br>
+                <div class="text-right">
+                  <button type="submit" class="btn btn-primary submit-btn">Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <h1 class="card-title" style="color: #02dca4">Documents</h1>
+              <div class="table-responsive">
+                <table id="ejemplo" class="table table-striped" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th>SI.No</th>
+                      <th>Name</th>
+                      <th>Insurance Type</th>
+                      <th>Relationship</th>
+                      <th>Gender</th>
+                      <th>Age</th>
+                      <th>Aadhaar</th>
+                      <th>Medical Report</th>
+                      <th>Insurance</th>
+                      <th>Corporate Id Card</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let patient of patientInsuranceDetailsList; let i=index">
+                      <td>{{i+1}}</td>
+                      <td>{{patient.Name}}</td>
+                      <td>{{patient.InsuranceType}}</td>
+                      <td>{{patient.Relation}}</td>
+                      <td>{{patient.Gender}}</td>
+                      <td>{{patient.Age}}</td>
+                      <td>
+                        <a href="javascript:void(0);" *ngIf="patient.AadharCardURL"
+                          (click)="open(mymodal, patient.AadharCardURL, 'aadharCard')"><i class="fa fa-file"></i>
+                        </a>
+                      </td>
+                      <td>
+                        <a href="javascript:void(0);" *ngIf="patient.MedicalHistoryURL"
+                          (click)="open(mymodal, patient.MedicalHistoryURL, 'MedicalHistory')"><i
+                            class="fa fa-file"></i>
+                        </a>
+                      </td>
+                      <td>
+                        <a href="javascript:void(0);" *ngIf="patient.InsuranceCardURL"
+                          (click)="open(mymodal, patient.InsuranceCardURL, 'InsuranceCard')"><i class="fa fa-file"></i>
+                        </a>
+                      </td>
+                      <td>
+                        <a href="javascript:void(0);" *ngIf="patient.CorporateIdCardURL"
+                          (click)="open(mymodal, patient.CorporateIdCardURL, 'CorporateIdCard')"><i
+                            class="fa fa-file"></i>
+                        </a>
+                      </td>
+                      <td>{{patient.Status}}</td>
+                      <td>
+                        <a *ngIf="patient.Status != 'InActive'" class="btn btn-sm bg-success-light"
+                          (click)="editPInsurance(patient)"><i class="far fa-edit"></i></a>
+                        <a *ngIf="patient.Status != 'InActive'" class="btn btn-sm bg-danger-light"
+                          (click)="deletePInsurance(patient)"><i class="far fa-trash-alt"></i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr *ngIf="patientInsuranceDetailsList.length <= 0 || patientInsuranceDetailsList.length == null">
+                      <td colspan="12">No Records Available</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-body"
+              *ngIf="patientInsuranceDetailsListHistory != null && patientInsuranceDetailsListHistory.length  > 0">
+              <h1 class="card-title" style="color: #02dca4">Historical Documents</h1>
+              <div class="table-responsive">
+                <div class="table-responsive">
+                  <table id="ejemplo" class="table table-striped" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>SI.No</th>
+                        <th>Name</th>
+                        <th>Insurance Type</th>
+                        <th>Relationship</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Aadhaar</th>
+                        <th>Medical Report</th>
+                        <th>Insurance</th>
+                        <th>Corporate Id Card</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let patient of patientInsuranceDetailsListHistory; let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{patient.Name}}</td>
+                        <td>{{patient.InsuranceType}}</td>
+                        <td>{{patient.Relation}}</td>
+                        <td>{{patient.Gender}}</td>
+                        <td>{{patient.Age}}</td>
+                        <td>
+                          <a href="javascript:void(0);" *ngIf="patient.AadharCardURL"
+                            (click)="open(mymodal, patient.AadharCardURL, 'aadharCard')"><i class="fa fa-file"></i>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="javascript:void(0);" *ngIf="patient.MedicalHistoryURL"
+                            (click)="open(mymodal, patient.MedicalHistoryURL, 'MedicalHistory')"><i
+                              class="fa fa-file"></i>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="javascript:void(0);" *ngIf="patient.InsuranceCardURL"
+                            (click)="open(mymodal, patient.InsuranceCardURL, 'InsuranceCard')"><i
+                              class="fa fa-file"></i>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="javascript:void(0);" *ngIf="patient.CorporateIdCardURL"
+                            (click)="open(mymodal, patient.CorporateIdCardURL, 'CorporateIdCard')"><i
+                              class="fa fa-file"></i>
+                          </a>
+                        </td>
+                        <td>{{patient.Status}}</td>
+                        <td>
+                          <a *ngIf="patient.Status != 'InActive'" class="btn btn-sm bg-success-light"
+                            (click)="editPInsurance(patient)"><i class="far fa-edit"></i></a>
+                          <a *ngIf="patient.Status != 'InActive'" class="btn btn-sm bg-danger-light"
+                            (click)="deletePInsurance(patient)"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody>
+                      <tr *ngIf="patientInsuranceDetailsList.length <= 0 || patientInsuranceDetailsList.length == null">
+                        <td colspan="12">No Records Available</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    {{reportType}}
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img src="{{imageFile}}" alt="Failed to Load">
+  </div>
+</ng-template>

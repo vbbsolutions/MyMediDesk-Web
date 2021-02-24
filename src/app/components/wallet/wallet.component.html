@@ -1,0 +1,196 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title" style="color: #02dca4">My Wallet&nbsp;&nbsp;&nbsp;
+      <span class="badge badge-pill bg-warning-light">{{walletAmount}} /-</span>
+      <button type="submit" class="btn btn-success submit-btn float-right" data-toggle="modal" data-target="#myModal1">
+        Wallet History
+      </button>
+    </h4>
+    <h4 class="card-title" style="color: #238bfa">Bank A/c Details :</h4>
+    <form [formGroup]="bankForm">
+      <div class="row form-row">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>Name of A/C Holder</label>
+            <input type="text" class="form-control" formControlName="ACName" [(ngModel)]="bankDetails.ACName"
+              (keypress)="allowOnlyChar($event)"
+              [ngClass]="{ 'is-invalid': submitted && bankDetailsControl.ACName.errors}" />
+            <div *ngIf="submitted && bankDetailsControl.ACName.errors" class="invalid-feedback">
+              <div *ngIf="bankDetailsControl.ACName.errors.required">A/C Holder Name is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>A/C Number</label>
+            <input type="text" class="form-control" formControlName="ACNumber" [(ngModel)]="bankDetails.ACNumber"
+              (keypress)="numbersOnly($event)"
+              [ngClass]="{ 'is-invalid': submitted && bankDetailsControl.ACNumber.errors}" />
+            <div *ngIf="submitted && bankDetailsControl.ACNumber.errors" class="invalid-feedback">
+              <div *ngIf="bankDetailsControl.ACNumber.errors.required">Account Number is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>IFSC Code</label>
+            <input type="text" class="form-control" formControlName="IFSC" [(ngModel)]="bankDetails.IFSC"
+              [ngClass]="{ 'is-invalid': submitted && bankDetailsControl.IFSC.errors}" />
+            <div *ngIf="submitted && bankDetailsControl.IFSC.errors" class="invalid-feedback">
+              <div *ngIf="bankDetailsControl.IFSC.errors.required">IFSC Code is required</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row form-row">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>Branch</label>
+            <input type="text" class="form-control" formControlName="Branch" [(ngModel)]="bankDetails.Branch"
+              (keypress)="allowOnlyChar($event)"
+              [ngClass]="{ 'is-invalid': submitted && bankDetailsControl.Branch.errors}" />
+            <div *ngIf="submitted && bankDetailsControl.Branch.errors" class="invalid-feedback">
+              <div *ngIf="bankDetailsControl.Branch.errors.required">Branch is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>Bank Name</label>
+            <input type="text" class="form-control" formControlName="Bank" [(ngModel)]="bankDetails.Bank"
+              (keypress)="allowOnlyChar($event)"
+              [ngClass]="{ 'is-invalid': submitted && bankDetailsControl.Bank.errors}" />
+            <div *ngIf="submitted && bankDetailsControl.Bank.errors" class="invalid-feedback">
+              <div *ngIf="bankDetailsControl.Bank.errors.required">Branch Name is required</div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>Check Details</label>
+            <select class="form-control select" formControlName="checkDetails" [(ngModel)]="bankDetails.checkDetails"
+              [ngClass]="{ 'is-invalid': submitted && bankDetailsControl.checkDetails.errors}">
+              <option value="">Select</option>
+              <option>Cancel Check</option>
+              <option>Passbook 1st Page</option>
+            </select>
+            <div *ngIf="submitted && bankDetailsControl.checkDetails.errors" class="invalid-feedback">
+              <div *ngIf="bankDetailsControl.checkDetails.errors.required">Check Details is required</div>
+            </div>
+          </div>
+        </div> -->
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>Amount</label>
+            <input type="text" class="form-control" formControlName="Amount" [(ngModel)]="bankDetails.Amount"
+              (keypress)="numbersOnly($event)"
+              [ngClass]="{ 'is-invalid': submitted && bankDetailsControl.Amount.errors}" />
+            <div *ngIf="submitted && bankDetailsControl.Amount.errors" class="invalid-feedback">
+              <div *ngIf="bankDetailsControl.Amount.errors.required">Amount Number is required</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row form-row">
+        <!-- <div class="col-12 col-md-3">
+          <div class="">
+            <div class="change-photo-btn up-pic">
+              <span><i class="fa fa-upload"></i> Upload receipt</span>
+              <input type="file" class="upload" formControlName="receipt" [(ngModel)]="bankDetails.receipt"
+                [ngClass]="{ 'is-invalid': submitted && bankDetailsControl.receipt.errors}" />
+              <div *ngIf="submitted && bankDetailsControl.receipt.errors" class="invalid-feedback">
+                <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                <div *ngIf="bankDetailsControl.receipt.errors.required">Receipt is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h4 class="card-title title1" style="color: #238bfa; ">Withdraw</h4><br><br>-->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>Upload Document</label>
+            <input type="file" class="form-control" formControlName="BankDocURL" [(ngModel)]="BankDocURL"
+              (change)="onSelectFile($event)"
+              [ngClass]="{ 'is-invalid': submitted && bankDetailsControl.BankDocURL.errors}" />
+            <div *ngIf="submitted && bankDetailsControl.BankDocURL.errors" class="invalid-feedback">
+              <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+              <div *ngIf="bankDetailsControl.BankDocURL.errors.required">Upload Receipt is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label>Notes</label>
+            <textarea class="form-control" style="height: 90px;" formControlName="Notes" [(ngModel)]="bankDetails.Notes"
+              placeholder="Type Appintment Note"
+              [ngClass]="{ 'is-invalid': submitted && bankDetailsControl.Notes.errors}">
+            </textarea>
+            <div *ngIf="submitted && bankDetailsControl.Notes.errors" class="invalid-feedback">
+              <div *ngIf="bankDetailsControl.Notes.errors.required">Notes is required</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row form-row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="form-group">
+            <button href="javascript:void(0);" class="btn btn-info submit-btn">Transfer to A/C</button>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="text-align: right;">
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary submit-btn"
+              (click)="submitWalletRequestDetailsData()">Save</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title" style="color: #02dca4">Wallet Requests</h1>
+        <div class="table-responsive">
+          <table id="ejemplo" class="table table-striped" style="width:100%">
+            <thead>
+              <tr>
+                <th>SI.No</th>
+                <th>Account Name</th>
+                <th>Account Number</th>
+                <th>Bank</th>
+                <th>Branch</th>
+                <th>IFSC Code</th>
+                <th>Amount</th>
+                <th>Notes</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let walletRequest of walletRequestDetailsData; let i=index">
+                <td>{{i+1}}</td>
+                <td>{{walletRequest.ACName}}</td>
+                <td>{{walletRequest.ACNumber}}</td>
+                <td>{{walletRequest.Bank}}</td>
+                <td>{{walletRequest.Branch}}</td>
+                <td>{{walletRequest.IFSC}}</td>
+                <td>{{walletRequest.Amount}}</td>
+                <td>{{walletRequest.Notes}}</td>
+                <td>
+                  <span class="badge badge-pill bg-warning-light"
+                    *ngIf="walletRequest.Status == 'Pending'">{{walletRequest.Status}}</span>
+                  <span class="badge badge-pill bg-success-light"
+                    *ngIf="walletRequest.Status == 'Approved'">{{walletRequest.Status}}</span>
+                  <span class="badge badge-pill bg-danger-light"
+                    *ngIf="walletRequest.Status == 'Rejected'">{{walletRequest.Status}}</span>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="walletRequestDetailsDataLength == 0">
+              <tr>
+                <td colspan="10" class="tableEmptyDataMsg">Sorry, Wallet Requests Not Available</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

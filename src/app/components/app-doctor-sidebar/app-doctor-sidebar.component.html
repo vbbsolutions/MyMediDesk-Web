@@ -1,0 +1,75 @@
+<div class="profile-sidebar">
+  <div class="widget-profile pro-widget-content">
+    <div class="profile-info-widget">
+      <a [routerLink]="['/hospital/profile']" class="booking-doc-img">
+        <img src="{{ImageURL}}" alt="Failed to load Image">
+      </a>
+      <div class="profile-det-info">
+        <h3 class="mb-3 red">{{hospitalName}}</h3>
+        <div class="patient-details">
+          <h5 class="mb-0">{{LogingMemberType}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dashboard-widget">
+    <nav class="dashboard-menu">
+      <ul>
+        <li class="active">
+          <a href="javascript:void(0);" [routerLink]="['/hospital/dashboard']">
+            <i class="fas fa-columns"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" [routerLink]="['/hospital/DoctorList']">
+            <i class="fas fa-columns"></i>
+            <span>Doctors</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" [routerLink]="['/hospital/slotList']">
+            <i class="fas fa-columns"></i>
+            <span>Slots</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" [routerLink]="['/hospital/myPatients']">
+            <i class="fa fa-hospital"></i>
+            <span>All Appointments</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" [routerLink]="['/hospital/patientList']">
+            <i class="fas fa-plus-square"></i>
+            <span>Patient List</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" [routerLink]="['/hospital/archievedList']">
+            <i class="fas fa-plus-square"></i>
+            <span>Archieved List</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" [routerLink]="['/hospital/profile']">
+            <i class="fas fa-user-cog"></i>
+            <span>Profile</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" [routerLink]="['/hospital/updatePassword']">
+            <i class="fas fa-user-cog"></i>
+            <span>Change Password</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

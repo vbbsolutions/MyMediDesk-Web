@@ -1,0 +1,203 @@
+<section class="appointment-wrap-layout1 bg-light-accent100">
+  <div class="row no-gutters">
+    <div class="col-xl-6">
+      <div class="appointment-box-layout1">
+        <h2 class="title title-bar-primary2">Make an <span class="red">Appointment</span></h2>
+        <p>Efficiently myocardinate market-driven innovation via open-source alignments. Dramatically engage
+          porescently.
+        </p>
+        <form [formGroup]="registerForm" (ngSubmit)="editAppointmentFun()">
+          <div class="row gutters-15">
+            <div class="col-12 form-group">
+              <div class="form-group">
+                <label>Location</label>
+                <select class="form-control select" formControlName="Location" [(ngModel)]="Location"
+                  [ngClass]="{ 'is-invalid': submitted && register.Location.errors}"
+                  (change)="OnLocationSelection(Location)">
+                  <option hidden value="">Select</option>
+                  <option [value]="Location.City" *ngFor=" let Location of	locationList">
+                    {{Location.City}}
+                  </option>
+                </select>
+                <div *ngIf=" submitted && register.Location.errors" class="invalid-feedback">
+                  <div *ngIf="register.Location.errors.required">Location is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 form-group">
+              <div class="form-group">
+                <label>Hospital</label>
+                <select class="form-control select" formControlName="Hospital" [(ngModel)]="Hospital"
+                  [ngClass]="{ 'is-invalid': submitted && register.Hospital.errors}"
+                  (change)="OnHospitalSelection(Hospital)">
+                  <option hidden value="">select</option>
+                  <option [value]="hospital.Id" *ngFor=" let hospital of	hospitalList">
+                    {{hospital.Name}}
+                  </option>
+                </select>
+                <div *ngIf=" submitted && register.Hospital.errors" class="invalid-feedback">
+                  <div *ngIf="register.Hospital.errors.required">Hospital is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 form-group">
+              <div class="form-group">
+                <label>Specialization</label>
+                <select class="form-control" class="form-control select" formControlName="Specialization"
+                  [(ngModel)]="Specialization" (change)="OnSpecializationSelection(Specialization)"
+                  [ngClass]="{ 'is-invalid': submitted && register.Specialization.errors}">
+                  <option hidden value="">select</option>
+                  <option [value]="specialization.SpecializationId" *ngFor=" let specialization of	specializationList">
+                    {{specialization.Specialization}}
+                  </option>
+                </select>
+                <div *ngIf="submitted && register.Specialization.errors" class="invalid-feedback">
+                  <div *ngIf="register.Specialization.errors.required">Specialization is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 form-group">
+              <div class="form-group">
+                <label>Doctor</label>
+                <select class="form-control" class="form-control select" formControlName="Doctor" [(ngModel)]="Doctor"
+                  (change)="OnDoctorSelection(Doctor)" [ngClass]="{ 'is-invalid': submitted && register.Doctor.errors}">
+                  <label>Doctor</label>
+                  <option hidden value="">select</option>
+                  <option [value]="doctor.DoctorId" *ngFor=" let doctor of	doctorsList">
+                    {{doctor.DoctorFirstName}} {{doctor.DoctorLastName}}
+                  </option>
+                </select>
+                <div *ngIf="submitted && register.Doctor.errors" class="invalid-feedback">
+                  <div *ngIf="register.Doctor.errors.required">Doctor is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 form-group">
+              <div class="form-group">
+                <label>Consultation Fee</label>
+                <input type="text" readonly disabled class="form-control" formControlName="ConsultationFee"
+                  placeholder="Consultation Fee" [(ngModel)]="ConsultationFee" (keypress)="numbersOnly($event)"
+                  [ngClass]="{ 'is-invalid': submitted && register.ConsultationFee.errors}" />
+                <div *ngIf="submitted && register.ConsultationFee.errors" class="invalid-feedback">
+                  <div *ngIf="register.ConsultationFee.errors.required">ConsultationFee is required</div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-12 form-group">
+								<input type="text" placeholder="Patient Name" class="form-control" formControlName="PatientName"
+									[(ngModel)]="appointmentData.PatientName" (keypress)="allowOnlyChar($event)"
+									[ngClass]="{ 'is-invalid': submitted && register.PatientName.errors}" />
+								<div *ngIf="submitted && register.PatientName.errors" class="invalid-feedback">
+									<div *ngIf="register.PatientName.errors.required">Patient Name is required</div>
+									<div *ngIf="register.PatientName.errors.maxlength">Patient Name must not greater than 50 digits</div>
+								</div>
+							</div>
+							<div class="col-md-6 form-group">
+								<input type="text" placeholder="Mobile Number" class="form-control" formControlName="MobileNumber"
+									[(ngModel)]="appointmentData.MobileNumber" (keypress)="numbersOnly($event)"
+									[ngClass]="{ 'is-invalid': submitted && register.MobileNumber.errors}">
+								<div *ngIf="submitted && register.MobileNumber.errors" class="invalid-feedback">
+									<div *ngIf="register.MobileNumber.errors.required">Mobile Number is required</div>
+									<div *ngIf="register.MobileNumber.errors.minlength">Mobile Number must be at least 10 digits</div>
+									<div *ngIf="register.MobileNumber.errors.maxlength">Mobile Number must be not greater then 10 digits
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 form-group">
+								<input type="email" placeholder="E-mail" class="form-control" formControlName="Email"
+									[(ngModel)]="appointmentData.Email" [ngClass]="{ 'is-invalid': submitted && register.Email.errors}" />
+								<div *ngIf="submitted && register.Email.errors" class="invalid-feedback">
+									<div *ngIf="register.Email.errors.required">Email is required</div>
+									<div *ngIf="register.Email.errors.email">Email must be a valid email address</div>
+								</div>
+							</div>
+							<div class="col-sm-6 form-group">
+								<i class="far fa-calendar-alt"></i>
+								<input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control"
+									placeholder="Appointment Date *" [min]="min" formControlName="AppointmentDate"
+									[(ngModel)]="appointmentData.AppointmentDate"
+									[ngClass]="{ 'is-invalid': submitted && register.AppointmentDate.errors}" />
+								<owl-date-time #dt1></owl-date-time>
+								<div *ngIf="submitted && register.AppointmentDate.errors" class="invalid-feedback">
+									<div *ngIf="register.AppointmentDate.errors.required">Appointment Date is required</div>
+								</div>
+							</div> -->
+            <!-- <div class="col-12 form-group">
+              <div class="form-group">
+                <label>Time</label>
+                <select class="form-control select" formControlName="SlotId" [(ngModel)]="appointmentData.SlotId"
+                  [ngClass]="{ 'is-invalid': submitted && register.SlotId.errors}">
+                  <label>CreatedDate</label>
+                  <option hidden value="">select</option>
+                  <option [value]="slotDetails.Id" *ngFor=" let slotDetails of	slotDetailsList">
+                    {{slotDetails.SlotTime| date:'dd-MM-yyyy HH:mm':'GMT05:30'}}
+                  </option>
+                </select>
+                <div *ngIf="submitted && register.SlotId.errors" class="invalid-feedback">
+                  <div *ngIf="register.SlotId.errors.required">Time is required</div>
+                </div>
+              </div>
+            </div> -->
+            <div class="col-12 form-group">
+              <div class="row">
+                <div class="col-7 form-group">
+                  <label>Date</label>
+                  <select class="form-control form-control select" formControlName="SlotDate" [(ngModel)]="SlotDate"
+                    (change)="selectDate(SlotDate)" [ngClass]="{ 'is-invalid': submitted && register.SlotDate.errors}">
+                    <option hidden value="">Select</option>
+                    <option [value]="slotDetails.SlotTime| date:'dd-MM-yyyy'" *ngFor=" let slotDetails of	slotDateList">
+                      {{slotDetails.SlotTime| date:'dd-MM-yyyy'}}
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && register.SlotDate.errors" class="invalid-feedback">
+                    <div *ngIf="register.SlotDate.errors.required">Date is required</div>
+                  </div>
+                </div>
+                <div class="col-5 form-group">
+                  <label>Time</label>
+                  <select class="form-control form-control select" formControlName="SlotId" (change)="selectTime()"
+                    [(ngModel)]="appointmentData.SlotId"
+                    [ngClass]="{ 'is-invalid': submitted && register.SlotId.errors}">
+                    <option hidden value="">Select</option>
+                    <option [value]="slotTime.Id" *ngFor=" let slotTime of	slotTimeList">
+                      {{slotTime.SlotTime| date:'hh:mm a':'GMT+05:30'}}
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && register.SlotId.errors" class="invalid-feedback">
+                    <div *ngIf="register.SlotId.errors.required">Time is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 form-group">
+              <label>Notes</label>
+              <div class="form-group">
+                <textarea class="form-control textarea" placeholder="Type Appintment Note" formControlName="Notes"
+                  [(ngModel)]="appointmentData.Notes"
+                  [ngClass]="{ 'is-invalid': submitted && register.Notes.errors}"></textarea>
+                <div *ngIf="submitted && register.Notes.errors" class="invalid-feedback">
+                  <div *ngIf="register.Notes.errors.required">Notes is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 form-group">
+              <div class="row">
+                <div class="col-md-2 form-group text-left">
+                  <button type="reset" class="item-btn" (click)="reset()">Clear</button>
+                </div>
+                <div class="col-md-10 form-group text-right">
+                  <button class="item-btn">Make an Appointment</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-xl-6">
+      <div class="appointment-banner">
+        <img src="../../../assets/img/doctors/figure2.png" alt="appointment" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</section>

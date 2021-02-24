@@ -1,0 +1,194 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h1 class="mb-3 red">Update Profile</h1>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="userProfileForm" (ngSubmit)="userProfileFun()">
+          <div class="row form-row">
+            <div class="col-6 col-md-6">
+              <div class="form-group">
+                <div class="change-avatar">
+                  <div class="profile-img">
+                    <img src="{{ImageURL}}" alt="User Image" (click)="open(mymodal, ImageURL)">
+                  </div>
+                  <div class="upload-img">
+                    <div class="change-photo-btn">
+                      <span><i class="fa fa-upload"></i> Upload Photo</span>
+                      <input type="file" class="upload" (change)="onSelectFile($event)">
+                    </div>
+                    <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-6">
+              <div class="form-group">
+                <div class="change-avatar">
+                  <div class="profile-img">
+                    <span style="font: bold; color: blue;">
+                      User Code : {{userProfileData.UserCode}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" class="form-control" formControlName="FirstName"
+                  [(ngModel)]="userProfileData.FirstName" (keypress)="allowOnlyChar($event)"
+                  [ngClass]="{ 'is-invalid': submitted && userProfileControl.FirstName.errors}" />
+                <div *ngIf="submitted && userProfileControl.FirstName.errors" class="invalid-feedback">
+                  <div *ngIf="userProfileControl.FirstName.errors.required">User Name is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control" formControlName="LastName"
+                  [(ngModel)]="userProfileData.LastName" (keypress)="allowOnlyChar($event)"
+                  [ngClass]="{ 'is-invalid': submitted && userProfileControl.LastName.errors}" />
+                <div *ngIf="submitted && userProfileControl.LastName.errors" class="invalid-feedback">
+                  <div *ngIf="userProfileControl.LastName.errors.required">User Name is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <label>Location</label>
+                <select class="form-control" formControlName="State" [(ngModel)]="userProfileData.State"
+                  [ngClass]="{ 'is-invalid': submitted && userProfileControl.State.errors}">
+                  <option hidden value="">Select Location</option>
+                  <option value="Ameerpet">Ameerpet</option>
+                  <option value="BanjaraHills">BanjaraHills</option>
+                  <option value="JubleeHills">JubleeHills</option>
+                  <option value="Kukatpally">Kukatpally</option>
+                  <option value="Sanathnagar">Sanathnagar</option>
+                </select>
+                <div *ngIf="submitted && userProfileControl.State.errors" class="invalid-feedback">
+                  <div *ngIf="userProfileControl.State.errors.required">State is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <label>City</label>
+                <select class="form-control" formControlName="City" [(ngModel)]="userProfileData.City"
+                  [ngClass]="{ 'is-invalid': submitted && userProfileControl.City.errors}">
+                  <option hidden value="">Select City</option>
+                  <option value="Hyderabad">Hyderabad</option>
+                  <!-- <option value="Warangal">Warangal</option>
+                  <option value="Nizamabad">Nizamabad</option>
+                  <option value="Karimnagar">Karimnagar</option>
+                  <option value="Ramagundam">Ramagundam</option>
+                  <option value="Khammam">Khammam</option>
+                  <option value="Mahbubnagar">Mahbubnagar</option>
+                  <option value="Mancherial">Mancherial</option>
+                  <option value="Adilabad">Adilabad</option>
+                  <option value="Suryapet">Suryapet</option>
+                  <option value="Jagtial">Jagtial</option>
+                  <option value="Miryalaguda">Miryalaguda</option>
+                  <option value="Nirmal">Nirmal</option>
+                  <option value="Kamareddy">Kamareddy</option>
+                  <option value="Kothagudem">Kothagudem</option>
+                  <option value="Bodhan">Bodhan</option>
+                  <option value="Palwancha">Palwancha</option>
+                  <option value="Mandamarri">Mandamarri</option>
+                  <option value="Koratla">Koratla</option>
+                  <option value="Sircilla">Sircilla</option>
+                  <option value="Tandur">Tandur</option>
+                  <option value="Siddipet">Siddipet</option>
+                  <option value="Wanaparthy">Wanaparthy</option>
+                  <option value="Kagaznagar">Kagaznagar</option>
+                  <option value="Gadwal">Gadwal</option>
+                  <option value="Sangareddy">Sangareddy</option>
+                  <option value="Bellampalle">Bellampalle</option>
+                  <option value="Bhongir">Bhongir</option>
+                  <option value="Vikarabad">Vikarabad</option>
+                  <option value="Jangaon">Jangaon</option>
+                  <option value="Bhadrachalam">Bhadrachalam</option>
+                  <option value="Bhainsa">Bhainsa</option>
+                  <option value="Farooqnagar">Farooqnagar</option>
+                  <option value="Medak">Medak</option>
+                  <option value="Narayanpet">Narayanpet</option>
+                  <option value="Sadasivpet">Sadasivpet</option>
+                  <option value="Yellandu">Yellandu</option>
+                  <option value="Manuguru">Manuguru</option>
+                  <option value="Kyathampalle">Kyathampalle</option>
+                  <option value="Nagarkurnool">Nagarkurnool</option> -->
+                </select>
+                <div *ngIf="submitted && userProfileControl.City.errors" class="invalid-feedback">
+                  <div *ngIf="userProfileControl.City.errors.required">City is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row form-row">
+            <div class="col-12 col-md-12 text-right">
+              <div class="form-group">
+                <div class="submit-section">
+                  <button type="submit" class="btn btn-primary submit-btn btn-small">Save Changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <hr>
+        <form [formGroup]="emailForm" (ngSubmit)="emailFun()">
+          <div class="row form-row">
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label>Email ID</label>
+                <input type="email" class="form-control" formControlName="Email" [(ngModel)]="emailData.Email"
+                  [ngClass]="{ 'is-invalid': submitted && emailControl.Email.errors}" />
+                <div *ngIf="submitted && emailControl.Email.errors" class="invalid-feedback">
+                  <div *ngIf="emailControl.Email.errors.required">Email is required</div>
+                  <div *ngIf="emailControl.Email.errors.email">Email must be a valid email address</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label>Mobile Number</label>
+                <input type="text" class="form-control" formControlName="MobileNumber"
+                  [(ngModel)]="emailData.MobileNumber" (keypress)="numbersOnly($event)"
+                  [ngClass]="{ 'is-invalid': submitted && emailControl.MobileNumber.errors}" />
+                <div *ngIf="submitted && emailControl.MobileNumber.errors" class="invalid-feedback">
+                  <div *ngIf="emailControl.MobileNumber.errors.required">Mobile Number is required</div>
+                  <div *ngIf="emailControl.MobileNumber.errors.minlength">Mobile Number must be at least 10 digits
+                  </div>
+                  <div *ngIf="emailControl.MobileNumber.errors.maxlength">Mobile Number must be not greater then
+                    10
+                    digits
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 text-right">
+              <div class=" form-group">
+                <label>&nbsp;</label>
+                <div class="submit-section">
+                  <button type="submit" class="btn btn-primary submit-btn btn-small">Save Changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img src="{{imageFile}}" alt="Failed to Load">
+  </div>
+</ng-template>

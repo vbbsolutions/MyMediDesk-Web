@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h1 class="mb-3 red">Authenticate</h1>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <label class="OTPMsg" *ngIf="otpMsg">Please Enter OTP sent to your Mail</label>
+          </div>
+        </div>
+        <form [formGroup]="authenticateForm" (ngSubmit)="authenticateFun()">
+          <div class="form-row">
+            <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12">
+              <input type="text" class="form-control" formControlName="OTP" [(ngModel)]="otpData.OTP" placeholder="OTP"
+                [ngClass]="{ 'is-invalid': submitted && OTPControl.OTP.errors}" (keypress)="numbersOnly($event)" />
+              <div *ngIf="submitted && OTPControl.OTP.errors" class="invalid-feedback">
+                <div *ngIf="OTPControl.OTP.errors.required">OTP is required</div>
+                <div *ngIf="OTPControl.OTP.errors.maxlength">OTP must be not greater then 6 digits</div>
+              </div>
+            </div>
+            <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12">
+              <div class="submit-section">
+                <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12">
+              <label style="color: #f44336; font-size: small; font-style: italic; text-align: right;">Not received
+                &nbsp;
+                <a href="javascript:void(0);" style="color: blue; border-bottom: 1px solid blue;"
+                  (click)="resendOTP()">Send
+                  again?
+                </a>
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

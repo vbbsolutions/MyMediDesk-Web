@@ -1,0 +1,41 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Create Report</h4>
+            <p class="card-category">Complete your Report</p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="createReportForm" (ngSubmit)="reportFormFun()">
+              <div class="form-row">
+                <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <label>Patient ID<span class="required"> * </span></label>
+                  <input type="text" class="form-control" formControlName="PatientId" [(ngModel)]="reportData.PatientId"
+                    [ngClass]="{ 'is-invalid': submitted && reportControl.PatientId.errors}" />
+                  <div *ngIf="submitted && reportControl.PatientId.errors" class="invalid-feedback">
+                    <div *ngIf="reportControl.PatientId.errors.required">Patient ID is required</div>
+                  </div>
+                </div>
+                <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <label>Report Type ID<span class="required"> * </span></label>
+                  <input type="text" class="form-control" formControlName="ReportTypeId"
+                    [(ngModel)]="reportData.ReportTypeId"
+                    [ngClass]="{ 'is-invalid': submitted && reportControl.ReportTypeId.errors}" />
+                  <div *ngIf="submitted && reportControl.ReportTypeId.errors" class="invalid-feedback">
+                    <div *ngIf="reportControl.ReportTypeId.errors.required">Report Type ID is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-right">
+                <button class="btn btn-secondary" type="reset" (click)="reset()">Cancel</button>
+                <button class="btn btn-primary mr-1">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

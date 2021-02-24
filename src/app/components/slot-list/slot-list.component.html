@@ -1,0 +1,208 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <div class="row">
+          <div class="col-md-6 text-left">
+            <h1 class="mb-3 red">Slot List</h1>
+          </div>
+          <div class="col-md-6 text-right">
+            <a href="javascript:void(0);" [routerLink]="['/hospital/slot']">
+              <button class="btn btn-success btn-md float-right">
+                + ADD Slot
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <!-- <div class="form-row">
+          <div class="form-group col-md-6 text-left">
+            <div class="form-row">
+              <label for="inputPassword" class="col-sm-2 col-form-label form-inline">Search:</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchItem">
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-6 text-right">
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Show
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="javascript:void(0);">5</a>
+                <a class="dropdown-item" href="javascript:void(0);">10</a>
+                <a class="dropdown-item" href="javascript:void(0);">20</a>
+                <a class=" dropdown-item" href="javascript:void(0);">50</a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="container">
+          <div class="row">
+            <!-- <div class="col-lg-3 col-md-4 col-sm-2  col-xs-1" *ngFor="let slot of slotList">
+              <div class="card widget-profile pat-widget-profile widget-1">
+                <div class="card-body">
+                  <div class="pro-widget-content">
+                    <div class="profile-info-widget">
+                      <a href="javascript:void(0);" class="booking-doc-img">
+                        <img class="avatar-img rounded-circle" src="{{ImageURL}}{{slot.DoctorImageUrl}}">
+                      </a>
+                      <div class="profile-det-info">
+                        <h3><a href="javascript:void(0);">{{slot.FirstName}} {{slot.LastName}}</a></h3>
+                      </div>
+                      <div class="profile-det-info">
+                        <h4>{{slot.Specialization}}</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="patient-info">
+                    <ul>
+                      <li>
+                        {{slot.SlotTime| date:'dd-MM-yyyy'}} &nbsp;&nbsp;
+                        {{slot.SlotTime| date:'hh:mm a':'GMT+05:30'}}
+                      </li>
+                      <li>
+                        <span *ngIf="!slot.SlotId && slot.Status != 'cancelled'"
+                          class="badge badge-pill bg-success-light">
+                          Open
+                        </span>
+                        <span *ngIf="slot.SlotId" class="badge badge-pill bg-success-light">
+                          Booked
+                        </span>
+                        <span *ngIf="slot.Status == 'cancelled'" class="badge badge-pill bg-warning-light">
+                          {{slot.Status}}
+                        </span>
+                        <span>
+                          <a href="javascript:void(0);" class="badge badge-pill bg-warning-light"
+                            *ngIf="!slot.SlotId && slot.Status != 'cancelled'"
+                            (click)="cancelSlot(slot.Id,slot.DoctorId)">
+                            Cancel
+                          </a>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <div class="col-lg-3 col-md-4 col-sm-2  col-xs-1" *ngFor="let slot of slotList">
+              <div class="container imgStyles3">
+                <div class="card widget-profile pat-widget-profile widget-1">
+                  <div class="card-body imgStyles1">
+                    <div class="row">
+                      <div class="col-lg-4 col-md-4 col-sm-8 col-xs-4 text-left">
+                        <img class="imgStyles2" src="{{ImageURL}}{{slot.DoctorImageUrl}}">
+                      </div>
+                      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-left">
+                        <div class="profile-det-info">
+                          <h3><a href="javascript:void(0);">{{slot.FirstName}} {{slot.LastName}}</a></h3>
+                          <!-- {{slot.Specialization}} -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left">
+                        {{slot.SlotTime| date:'dd-MM-yyyy'}}
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  text-right">
+                        {{slot.SlotTime| date:'hh:mm a':'GMT+05:30'}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <span *ngIf="slot.SlotId" class="badge badge-pill bg-success-light">
+                          Booked
+                        </span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <span *ngIf="slot.Status == 'cancelled'" class="badge badge-pill bg-warning-light">
+                          {{slot.Status}}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left">
+                        <span *ngIf="!slot.SlotId && slot.Status != 'cancelled'"
+                          class="badge badge-pill bg-success-light">
+                          Open
+                        </span>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  text-right">
+                        <a href="javascript:void(0);" class="badge badge-pill bg-warning-light"
+                          *ngIf="!slot.SlotId && slot.Status != 'cancelled'"
+                          (click)="cancelSlot(slot.Id,slot.DoctorId)">
+                          Cancel
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5 col-lg-4 col-xl-3" *ngIf="slotListLength == 0">
+              <span class="tableEmptyDataMsg">Sorry, Slots Not Available</span>
+            </div>
+          </div>
+          <!-- <div class="table-responsive table-scroll">
+          <table id="ejemplo" class="table table-striped">
+            <thead style="width: auto;">
+              <tr style="width: auto;">
+                <th>S.No</th>
+                <th>Doctor Name</th>
+                <th>Slot Date & Time</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let slot of slotList | filter:searchItem; let i=index">
+                <td>{{i+1}}</td>
+                <td>
+                  <h2 class="table-avatar tablePadding">
+                    <a href="javascript:void(0);" class="avatar avatar-sm mr-2">
+                      <img class="avatar-img rounded-circle" src="{{ImageURL}}{{slot.DoctorImageUrl}}">
+                    </a>
+                    <a href="javascript:void(0);">
+                      {{slot.FirstName}} {{slot.LastName}}
+                      <span class="d-block text-info">{{slot.Specialization}}</span>
+                    </a>
+                  </h2>
+
+                </td>
+                <td>
+                  {{slot.SlotTime| date:'dd-MM-yyyy'}}
+                  <span class=" d-block text-info">{{slot.SlotTime| date:'hh:mm a':'GMT+05:30'}}</span>
+                </td>
+                <td>
+                  <span *ngIf="slot.SlotId" class="badge badge-pill bg-success-light">
+                    Booked
+                  </span>
+                  <span *ngIf="!slot.SlotId && slot.Status != 'cancelled'" class="badge badge-pill bg-success-light">
+                    Open
+                  </span>
+                  <span *ngIf="slot.Status == 'cancelled'" class="badge badge-pill bg-warning-light">
+                    {{slot.Status}}
+                  </span>
+                  <a href="javascript:void(0);" class="badge badge-pill bg-warning-light"
+                    *ngIf="!slot.SlotId && slot.Status != 'cancelled'" (click)="cancelSlot(slot.Id,slot.DoctorId)">
+                    Cancel
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="!slotListLength">
+              <tr>
+                <td colspan="4" class="tableEmptyDataMsg">Slots Empty</td>
+              </tr>
+            </tbody>
+          </table>
+        </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

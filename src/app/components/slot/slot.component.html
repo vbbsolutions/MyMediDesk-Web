@@ -1,0 +1,278 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <!-- <form [formGroup]="createSlotForm" (ngSubmit)="createSlotFun()">
+          <div class="form-row">
+            <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12">
+              <label>Slot Date & Time<span class="required"> * </span></label>
+              <input type="datetime-local" class="form-control keyDisabled" formControlName="SlotTime"
+                [(ngModel)]="slotData.SlotTime" [min]="min"
+                [ngClass]="{ 'is-invalid': submitted && slotControl.SlotTime.errors}" />
+              <div *ngIf="submitted && slotControl.SlotTime.errors" class="invalid-feedback">
+                <div *ngIf="slotControl.SlotTime.errors.required">Slot Date & Time is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="text-right">
+            <button class="btn btn-primary mr-1" type="reset" (click)="reset()">Cancel</button>
+            <button class="btn btn-primary mr-1">Submit</button>
+          </div>
+          <div class="text-right">
+            <button class="btn btn-primary mr-1" (click)="onReset()">Cancel</button>
+            <button class="btn btn-primary mr-1">Submit</button>
+          </div>
+        </form> -->
+        <div class="card border-light mb-3">
+          <div class="card-header">
+            <h1 style="font-weight: bolder;">Create New Slot</h1>
+          </div>
+          <div class="card-body text-success">
+            <form [formGroup]="createSlotForm" (ngSubmit)="createSlots()">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label form-inline">Specialization</label>
+                <div class="col-sm-9">
+                  <select class="form-control" formControlName="specializationId" [(ngModel)]="specializationId"
+                    (change)="OnSpecializationSelection(specializationId)"
+                    [ngClass]="{ 'is-invalid': submitted && slotControl.specializationId.errors}">
+                    <option hidden value="">Select</option>
+                    <option [value]="specialization.SpecializationId"
+                      *ngFor=" let specialization of	specializationList">
+                      {{specialization.Specialization}}
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && slotControl.specializationId.errors" class="invalid-feedback">
+                    <div *ngIf="slotControl.specializationId.errors.required">Doctor ID is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label form-inline">Doctor ID</label>
+                <div class="col-sm-9">
+                  <select class="form-control" formControlName="DoctorId" [(ngModel)]="courseData.DoctorId"
+                    [ngClass]="{ 'is-invalid': submitted && slotControl.DoctorId.errors}">
+                    <option hidden value="">Select</option>
+                    <option [value]="doctor.DoctorId" *ngFor=" let doctor of	doctorList">
+                      {{doctor.DoctorId}}-{{doctor.DoctorFirstName}} {{doctor.DoctorLastName}}
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && slotControl.DoctorId.errors" class="invalid-feedback">
+                    <div *ngIf="slotControl.DoctorId.errors.required">Doctor ID is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label form-inline">Date Range</label>
+                <div class="col-sm-9">
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">From Date</label>
+                      <input [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" class="form-control keyDisabled"
+                        formControlName="FromDate" [(ngModel)]="courseData.FromDate" placeholder="From Date" [min]="min"
+                        [ngClass]="{ 'is-invalid': submitted && slotControl.FromDate.errors}">
+                      <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+                      <div *ngIf="submitted && slotControl.FromDate.errors" class="invalid-feedback">
+                        <div *ngIf="slotControl.FromDate.errors.required">From Date is required</div>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputPassword4">To Date</label>
+                      <input [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" class="form-control keyDisabled"
+                        formControlName="ToDate" format='dd-MMM-yyyy' [(ngModel)]="courseData.ToDate" [min]="min"
+                        placeholder="To Date" [ngClass]="{ 'is-invalid': submitted && slotControl.ToDate.errors}">
+                      <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
+                      <div *ngIf="submitted && slotControl.ToDate.errors" class="invalid-feedback">
+                        <div *ngIf="slotControl.ToDate.errors.required">To Date is required</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label form-inline">Max No:of Sessions/Day</label>
+                <div class="col-sm-9">
+                  <select class="form-control" formControlName="SessionsPerDay" [(ngModel)]="courseData.SessionsPerDay"
+                    [ngClass]="{ 'is-invalid': submitted && slotControl.SessionsPerDay.errors}">
+                    <option hidden value="">---Select No.Of sessions---</option>
+                    <option value="1"> 1 </option>
+                    <option value="2"> 2 </option>
+                    <option value="3"> 3 </option>
+                    <option value="4"> 4 </option>
+                    <option value="5"> 5 </option>
+                    <option value="6"> 6 </option>
+                    <option value="7"> 7 </option>
+                    <option value="8"> 8 </option>
+                    <option value="9"> 9 </option>
+                    <option value="10"> 10 </option>
+                    <option value="11"> 11 </option>
+                    <option value="12"> 12 </option>
+                    <option value="13"> 13 </option>
+                    <option value="14"> 14 </option>
+                    <option value="15"> 15 </option>
+                    <option value="16"> 16 </option>
+                  </select>
+                  <div *ngIf="submitted && slotControl.SessionsPerDay.errors" class="invalid-feedback">
+                    <div *ngIf="slotControl.SessionsPerDay.errors.required">Sessions is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label form-inline">Session Duration</label>
+                <div class="col-sm-9">
+                  <select class="form-control" formControlName="SlotDuration" [(ngModel)]="courseData.SlotDuration"
+                    [ngClass]="{ 'is-invalid': submitted && slotControl.SlotDuration.errors}">
+                    <option hidden value="">---Select Duration---</option>
+                    <option value="5"> 5min </option>
+                    <option value="10"> 10min </option>
+                    <option value="15"> 15min </option>
+                    <option value="20"> 20min </option>
+                    <option value="25"> 25min </option>
+                    <option value="30"> 30min </option>
+                    <option value="45"> 45min </option>
+                    <option value="60"> 60min </option>
+                  </select>
+                  <div *ngIf="submitted && slotControl.SlotDuration.errors" class="invalid-feedback">
+                    <div *ngIf="slotControl.SlotDuration.errors.required">Slot Duration is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label form-inline">Break Time</label>
+                <div class="col-sm-9">
+                  <select class="form-control" formControlName="BreakTime" [(ngModel)]="courseData.BreakTime"
+                    [ngClass]="{ 'is-invalid': submitted && slotControl.BreakTime.errors}">
+                    <option hidden value="">--Select Break Time--</option>
+                    <option value="0"> 0min </option>
+                    <option value="1"> 1min </option>
+                    <option value="2"> 2min </option>
+                    <option value="3"> 3min </option>
+                    <option value="5"> 5min </option>
+                    <option value="10"> 10min </option>
+                    <option value="15"> 15min </option>
+                    <option value="20"> 20min </option>
+                    <option value="25"> 25min </option>
+                    <option value="30"> 30min </option>
+                    <option value="45"> 45min </option>
+                    <option value="60"> 60min </option>
+                  </select>
+                  <div *ngIf="submitted && slotControl.BreakTime.errors" class="invalid-feedback">
+                    <div *ngIf="slotControl.BreakTime.errors.required">Slot Duration is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label form-inline">Sessions Shift</label>
+                <div class="col-sm-3">
+                  <input type="radio" name="sessionShift" formControlName="sessionShift"
+                    [(ngModel)]="courseData.dayStatus" value="M" (click)="morningFunction()">
+                  Morning
+                </div>
+                <div class="col-sm-3">
+                  <input type="radio" name="sessionShift" formControlName="sessionShift"
+                    [(ngModel)]="courseData.dayStatus" value="E" (click)="eveningFunction()">
+                  Evening
+                </div>
+                <div class="col-sm-3">
+                  <input type="radio" name="sessionShift" formControlName="sessionShift"
+                    [(ngModel)]="courseData.dayStatus" value="B" (click)="bothFunction()">
+                  Morning & Evening
+                </div>
+              </div>
+              <div class="form-group row" *ngIf="morningStatus">
+                <label class="col-sm-3 col-form-label form-inline">Morning Start Timing</label>
+                <div class="col-sm-9">
+                  <input [ngxTimepicker]="picker" class="form-control" formControlName="MngStartTime"
+                    (keypress)="keyDisable(event)" placeholder="12:00 AM" [(ngModel)]="courseData.MngStartTime"
+                    [ngClass]="{ 'is-invalid': submitted && slotControl.MngStartTime.errors}">
+                  <ngx-material-timepicker #picker></ngx-material-timepicker>
+                  <div *ngIf="submitted && slotControl.MngStartTime.errors" class="invalid-feedback">
+                    <div *ngIf="slotControl.MngStartTime.errors.required">Morning Start is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row" *ngIf="eveningStatus">
+                <label class="col-sm-3 col-form-label form-inline">Evening Start Timing</label>
+                <div class="col-sm-9">
+                  <input [ngxTimepicker]="picker" class="form-control" formControlName="EvngStartTime"
+                    (keypress)="keyDisable(event)" placeholder="12:00 PM" [(ngModel)]="courseData.EvngStartTime"
+                    [ngClass]="{ 'is-invalid': submitted && slotControl.EvngStartTime.errors}">
+                  <ngx-material-timepicker #picker></ngx-material-timepicker>
+                  <div *ngIf="submitted && slotControl.EvngStartTime.errors" class="invalid-feedback">
+                    <div *ngIf="slotControl.EvngStartTime.errors.required">Evening Start is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label form-inline">&nbsp;</label>
+                <div class="col-sm-9">
+                  <div class="form-row">
+                    <div class="form-group col-md-6 text-left">
+                      <button type="reset" class="btn btn-danger btn-md btn-fw" (click)="clearRadioButtons()">
+                        Cancel
+                      </button>
+                    </div>
+                    <div class="form-group col-md-6 text-right">
+                      <button type="submit" class="btn btn-success btn-md btn-fw">
+                        Create Slots
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <!-- <mat-form-field appearance="fill">
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="picker">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12" *ngIf="slotDisplayList.length > 0">
+            <table class="table table-bordered">
+              <thead>
+                <th style="text-align: center;">Session Date</th>
+                <ng-container *ngFor="let slot of slotDisplayList[0].SlotTimings">
+                  <th style="text-align: center;">Time</th>
+                </ng-container>
+              </thead>
+              <tbody>
+                <tr *ngFor="let slot of slotDisplayList">
+                  <td>{{slot.SlotDate | date:'dd-MMM-yyyy'}}</td>
+                  <td *ngFor="let st of slot.SlotTimings">{{st.SlotTimeShow}} - {{st.SlotEndTimeShow}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <div class="row">
+              <div class="col-md-6 text-left">
+                <button type="reset" class="btn btn-danger btn-md btn-fw" (click)="clearRadioButtons()">
+                  Clear Slots
+                </button>
+              </div>
+              <div class="col-md-6 text-right">
+                <button type="submit" class="btn btn-success btn-md btn-fw" (click)="onCreateSlot()">
+                  Submit Slots
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12" *ngIf="slotDisplayList.length==0">
+            <table class="table table-bordered">
+              <thead>
+                <th style="text-align: center;">Session Date</th>
+                <th style="text-align: center;">Time</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="2">No Sessions Created Yet...!!!</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
